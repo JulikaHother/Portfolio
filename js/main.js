@@ -8,6 +8,8 @@ let projBubbleElements = [];
 let stapelContainer = document.querySelector("#stapelcontainer");
 let container = document.querySelector(".fixed-container");
 let headlineBG = document.querySelector(".headline");
+let closeButton = document.querySelector("#closeButton");
+let title = document.querySelector(".name");
 let imagesStapel = [];
 let n = 0;
 let current;
@@ -23,7 +25,6 @@ let headBalken = document.getElementById("head-balken");
 let aboutPage = document.getElementById("about");
 let infoText;
 let pfeil = "↓ &nbsp;&nbsp;&nbsp;";
-
 
 // ++++++ Elemente generieren +++++++++
 
@@ -42,13 +43,22 @@ for (i = 0; i < projektKeys.length; i++) {
   projBubbleElements[i].style.zIndex = r;
 
   projBubbleElements[i].innerHTML = projektKeys[i];
+  for (let i = 0; i < projBubbleElements.length; i++) {
+    const element = projBubbleElements[i];
+    if (i < projBubbleElements.length - 5) {
+      element.style.display = "none";
+    } else {
+      element.style.display = "block";
+    }
+  }
 }
 
 // ++++++++ Durchwechseln bei Scrollen +++++++
 document.addEventListener("wheel", (e) => {
   if (
     document.getElementById("stapelcontainer").style.display != "block" &&
-    aboutPage.style.display != "block" && scrollCounter%2 == 0
+    aboutPage.style.display != "block" &&
+    scrollCounter % 2 == 0
   ) {
     durchrotieren(projBubbleElements);
     if (e.deltaY < 0) {
@@ -59,18 +69,27 @@ document.addEventListener("wheel", (e) => {
     let curr = projBubbleElements[projBubbleElements.length - 1].id;
 
     pTitle.textContent = projekte[curr].title;
-    stapelContainer.style.backgroundColor = "black";
+    // stapelContainer.style.backgroundColor = "black";
 
     for (let i = 0; i < projBubbleElements.length; i++) {
       projBubbleElements[i].style.zIndex = i;
-      projBubbleElements[i].style.mixBlendMode = "difference";
-      projBubbleElements[projBubbleElements.length - 1].style.mixBlendMode =
-        "normal";
+      //  projBubbleElements[i].style.mixBlendMode = "difference";
+      // projBubbleElements[projBubbleElements.length - 1].style.mixBlendMode =
+      // "normal";
     }
     startscreen = false;
   }
-  scrollCounter++
+  scrollCounter++;
   console.log(e);
+
+  for (let i = 0; i < projBubbleElements.length; i++) {
+    const element = projBubbleElements[i];
+    if (i < projBubbleElements.length - 4) {
+      element.style.display = "none";
+    } else {
+      element.style.display = "block";
+    }
+  }
 });
 
 // ++++++++ Stapel öffnen ++++++++
@@ -80,45 +99,73 @@ container.addEventListener("click", (e) => {
 
   if (n == 0 && !startscreen && projekte[current].images[0]) {
     pTitle.innerHTML = pfeil + pTitle.textContent;
+    nextImage(e);
 
-
-
-    imagesStapel[0] = createNeuesElement("img", current + n, "stapelBild");
-
-    imagesStapel[0].src =
-      "assets/images/" + current + "/" + projekte[current].images[0];
-    imagesStapel[0].style.transform =
-      "rotate(" + getRandomWinkel() + ") translateY(-50%) translateX(-50%)";
-    stapelContainer.appendChild(imagesStapel[0]);
     stapelContainer.style.display = "block";
-
-    nextImage();
-
-    n++;
   }
 });
 
+stapelContainer.addEventListener("click", (e) => {
+  if (n < projekte[current].images.length) {
+    nextImage(e);
+  }
+});
+
+function nextImage(e) {
+  imagesStapel[n] = createNeuesElement("img", current + n, "stapelBild");
+
+  imagesStapel[n].src =
+    "assets/images/" + current + "/" + projekte[current].images[n];
+  imagesStapel[n].style.transform =
+    "rotate(" + getRandomWinkel() + ") translateY(-50%) translateX(-50%)";
+  if (e.x < 250) {
+    imagesStapel[n].style.left = 280;
+  } else if (e.x > windowWidth - 250) {
+    imagesStapel[n].style.left = windowWidth - 280;
+  } else {
+    imagesStapel[n].style.left = e.x;
+  }
+  if (e.y < 300) {
+    imagesStapel[n].style.top = 330;
+  } else if (e.y > windowHeight - 250) {
+    imagesStapel[n].style.top = windowHeight - 280;
+  } else {
+    imagesStapel[n].style.top = e.y;
+  }
+
+  stapelContainer.appendChild(imagesStapel[n]);
+
+  n++;
+}
+
 // ++++++++ Stapel schließen ++++++++
 
+// stapelContainer.addEventListener("click", (e) => {
+//   if (e.target == stapelContainer) {
+//     pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
+//     for (i = 0; i < imagesStapel.length; i++) {
+//       imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
+//     }
+//     stapelContainer.style.display = "none";
+//     imagesStapel = [];
+//     n = 0;
+//   }
+// });
 
-stapelContainer.addEventListener("click", (e) => {
-
-  
-  if (e.target == stapelContainer) {
-    pTitle.innerHTML = pTitle.innerHTML.replace(pfeil,"");
-    for (i = 0; i < imagesStapel.length; i++) {
-      imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
-    }
-    stapelContainer.style.display = "none";
-    imagesStapel = [];
-    n = 0;
+closeButton.addEventListener("click", (e) => {
+  pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
+  for (i = 0; i < imagesStapel.length; i++) {
+    imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
   }
+  stapelContainer.style.display = "none";
+  imagesStapel = [];
+  n = 0;
 });
 
 // ++++ About Seite und Header +++++++
 let tempCurr;
 
-headBalken.addEventListener("mouseenter", (e) => {
+title.addEventListener("mouseenter", (e) => {
   if (stapelContainer.style.display != "block") {
     tempCurr = pTitle.textContent;
 
@@ -129,7 +176,7 @@ headBalken.addEventListener("mouseenter", (e) => {
     infoText.textContent = projekte[current].description;
   }
 });
-headBalken.addEventListener("mouseleave", (e) => {
+title.addEventListener("mouseleave", (e) => {
   if (stapelContainer.style.display != "block") {
     pTitle.textContent = tempCurr;
   } else if (typeof infoText != "undefined") {
@@ -138,7 +185,7 @@ headBalken.addEventListener("mouseleave", (e) => {
   }
 });
 
-headBalken.addEventListener("click", (e) => {
+title.addEventListener("click", (e) => {
   if (stapelContainer.style.display != "block") {
     tempCurr = pTitle.textContent;
     aboutPage.style.display = "block";
@@ -155,27 +202,7 @@ aboutPage.addEventListener("click", (e) => {
   }
 });
 
-
-
 // ++++++ Helferfunktionen ++++++
-
-function nextImage() {
-  imagesStapel[n].addEventListener("click", (e) => {
-    if (n < projekte[current].images.length) {
-      imagesStapel[n] = createNeuesElement("img", current + n, "stapelBild");
-
-      imagesStapel[n].src =
-        "assets/images/" + current + "/" + projekte[current].images[n];
-      imagesStapel[n].style.transform =
-        "rotate(" + getRandomWinkel() + ") translateY(-50%) translateX(-50%)";
-
-      stapelContainer.appendChild(imagesStapel[n]);
-
-      nextImage();
-      n++;
-    }
-  });
-}
 
 function getRandomWinkel() {
   let maxWinkel = 10;
