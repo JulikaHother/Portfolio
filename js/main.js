@@ -5,12 +5,17 @@ let randomPosY;
 let windowWidth = window.innerWidth;
 let windowHeight = window.innerHeight;
 let projBubbleElements = [];
+let indexrows = [];
 let stapelContainer = document.querySelector("#stapelcontainer");
 let container = document.querySelector(".fixed-container");
 let headlineBG = document.querySelector(".headline");
 let closeButton = document.querySelector("#closeButton");
 let title = document.querySelector(".name");
 let imagesStapel = [];
+
+let table = document.querySelector(".index")
+
+
 let n = 0;
 let current;
 let stapelText;
@@ -29,113 +34,184 @@ let pfeil = "↓ &nbsp;&nbsp;&nbsp;";
 // ++++++ Elemente generieren +++++++++
 
 for (i = 0; i < projektKeys.length; i++) {
-  projBubbleElements[i] = createNeuesElement(
-    "img",
-    projektKeys[i],
-    "projektbubble"
-  );
-  container.appendChild(projBubbleElements[i]);
+    projBubbleElements[i] = createNeuesElement(
+        "img",
+        projektKeys[i],
+        "projektbubble"
+    );
+    container.appendChild(projBubbleElements[i]);
 
-  r = Math.floor(Math.random() * Math.floor(projektKeys.length));
+    projBubbleElements[i].src =
+        "assets/images/hintergrund/" + projectValues[i].background;
+    projBubbleElements[i].style.zIndex = projektKeys.length - i;
 
-  projBubbleElements[i].src =
-    "assets/images/hintergrund/" + projectValues[i].background;
-  projBubbleElements[i].style.zIndex = r;
+    projBubbleElements[i].innerHTML = projektKeys[i];
 
-  projBubbleElements[i].innerHTML = projektKeys[i];
-  for (let i = 0; i < projBubbleElements.length; i++) {
-    const element = projBubbleElements[i];
-    if (i < projBubbleElements.length - 5) {
-      element.style.display = "none";
-    } else {
-      element.style.display = "block";
-    }
-  }
+    indexrows[i] = createNeuesElement(
+        "li",
+        "index-" + projektKeys[i],
+        "index-row"
+    );
+    table.appendChild(indexrows[i]);
+
+    let tempTitle = createNeuesElement(
+        "span",
+        "title-" + projektKeys[i],
+        "li-title"
+    );
+    indexrows[i].appendChild(tempTitle);
+
+    tempTitle.innerHTML = projectValues[i].title;
+
+    let tempCat = createNeuesElement(
+        "span",
+        "category-" + projektKeys[i],
+        "li-category"
+    );
+    indexrows[i].appendChild(tempCat);
+
+    tempCat.innerHTML = projectValues[i].category;
+
+    let tempYear = createNeuesElement(
+        "span",
+        "year-" + projektKeys[i],
+        "li-year"
+    );
+    indexrows[i].appendChild(tempYear);
+
+    tempYear.innerHTML = projectValues[i].year;
+
+    let r = Math.floor(Math.random() * 100)
+    indexrows[i].querySelector(".li-category").style.paddingLeft = r + "vw";
+
+}
+let counter = 0;
+let cb = 0
+for (i = 0; i < projektKeys.length; i++) {
+    projBubbleElements[i].style.filter = "blur(" + cb + "px)";
 }
 
-// ++++++++ Durchwechseln bei Scrollen +++++++
 document.addEventListener("wheel", (e) => {
-  if (
-    document.getElementById("stapelcontainer").style.display != "block" &&
-    aboutPage.style.display != "block" &&
-    scrollCounter % 2 == 0
-  ) {
-    durchrotieren(projBubbleElements);
-    if (e.deltaY < 0) {
-      scrolldown = true;
-    } else {
-      scrolldown = false;
-    }
-    let curr = projBubbleElements[projBubbleElements.length - 1].id;
 
-    pTitle.textContent = projekte[curr].title;
-    // stapelContainer.style.backgroundColor = "black";
+    if (e.deltaY > 0) {
+        scrolldown = true;
+        counter++;
+    } else {
+        scrolldown = false;
+        counter--;
+    }
+
+
+    // console.log(counter);
+    //++++++++  INDEX  +++++++++
+    if (scrolldown && cb > -10 && counter <= 0) {
+        cb = cb - 5;
+    } else if (cb < 50 && counter < 0 && counter <= 0) {
+        cb = cb + 5;
+    }
+    if (cb <= 30) {
+        table.style.display = "none";
+    } else if (cb >= 30) {
+        table.style.display = "grid";
+    }
+    for (i = 0; i < projektKeys.length; i++) {
+        projBubbleElements[i].style.filter = "blur(" + cb + "px)";
+    }
+
+    //++++++++  POJIS  +++++++++
+
+    if (scrolldown && counter % 2 == 0 && counter >= 0) {
+        oberstesEntfernen()
+    } else if (!scrolldown && counter % 2 == 0 && counter >= 0) {
+        neuesAnzeigen()
+    }
+
+
+
+})
+
+
+
+
+function oberstesEntfernen() {
 
     for (let i = 0; i < projBubbleElements.length; i++) {
-      projBubbleElements[i].style.zIndex = i;
-      //  projBubbleElements[i].style.mixBlendMode = "difference";
-      // projBubbleElements[projBubbleElements.length - 1].style.mixBlendMode =
-      // "normal";
-    }
-    startscreen = false;
-  }
-  scrollCounter++;
-  console.log(e);
+        const element = projBubbleElements[i];
+        if (!element.classList.contains("hide") && element != projBubbleElements[projBubbleElements.length]) {
+            element.classList.add("hide")
+            return;
+        } else if (element == projBubbleElements[projBubbleElements.length - 2]) {
+            console.log(projBubbleElements.length - 1);
+            return
 
-  for (let i = 0; i < projBubbleElements.length; i++) {
-    const element = projBubbleElements[i];
-    if (i < projBubbleElements.length - 4) {
-      element.style.display = "none";
-    } else {
-      element.style.display = "block";
+        }
+        console.log(i);
     }
-  }
-});
+
+
+
+}
+
+function neuesAnzeigen() {
+
+    for (let i = 0; i < projBubbleElements.length; i++) {
+        const element = projBubbleElements[i];
+        if (!element.classList.contains("hide")) {
+            projBubbleElements[i - 1].classList.remove("hide");
+            return;
+        }
+
+    }
+
+
+}
+
+
 
 // ++++++++ Stapel öffnen ++++++++
 
 container.addEventListener("click", (e) => {
-  current = projBubbleElements[projBubbleElements.length - 1].id;
+    current = projBubbleElements[projBubbleElements.length - 1].id;
 
-  if (n == 0 && !startscreen && projekte[current].images[0]) {
-    pTitle.innerHTML = pfeil + pTitle.textContent;
-    nextImage(e);
+    if (n == 0 && !startscreen && projekte[current].images[0]) {
+        pTitle.innerHTML = pfeil + pTitle.textContent;
+        nextImage(e);
 
-    stapelContainer.style.display = "block";
-  }
+        stapelContainer.style.display = "block";
+    }
 });
 
 stapelContainer.addEventListener("click", (e) => {
-  if (n < projekte[current].images.length) {
-    nextImage(e);
-  }
+    if (n < projekte[current].images.length) {
+        nextImage(e);
+    }
 });
 
 function nextImage(e) {
-  imagesStapel[n] = createNeuesElement("img", current + n, "stapelBild");
+    imagesStapel[n] = createNeuesElement("img", current + n, "stapelBild");
 
-  imagesStapel[n].src =
-    "assets/images/" + current + "/" + projekte[current].images[n];
-  imagesStapel[n].style.transform =
-    "rotate(" + getRandomWinkel() + ") translateY(-50%) translateX(-50%)";
-  if (e.x < 250) {
-    imagesStapel[n].style.left = 280;
-  } else if (e.x > windowWidth - 250) {
-    imagesStapel[n].style.left = windowWidth - 280;
-  } else {
-    imagesStapel[n].style.left = e.x;
-  }
-  if (e.y < 300) {
-    imagesStapel[n].style.top = 330;
-  } else if (e.y > windowHeight - 250) {
-    imagesStapel[n].style.top = windowHeight - 280;
-  } else {
-    imagesStapel[n].style.top = e.y;
-  }
+    imagesStapel[n].src =
+        "assets/images/" + current + "/" + projekte[current].images[n];
+    imagesStapel[n].style.transform =
+        "rotate(" + getRandomWinkel() + ") translateY(-50%) translateX(-50%)";
+    if (e.x < 250) {
+        imagesStapel[n].style.left = 280;
+    } else if (e.x > windowWidth - 250) {
+        imagesStapel[n].style.left = windowWidth - 280;
+    } else {
+        imagesStapel[n].style.left = e.x;
+    }
+    if (e.y < 300) {
+        imagesStapel[n].style.top = 330;
+    } else if (e.y > windowHeight - 250) {
+        imagesStapel[n].style.top = windowHeight - 280;
+    } else {
+        imagesStapel[n].style.top = e.y;
+    }
 
-  stapelContainer.appendChild(imagesStapel[n]);
+    stapelContainer.appendChild(imagesStapel[n]);
 
-  n++;
+    n++;
 }
 
 // ++++++++ Stapel schließen ++++++++
@@ -153,85 +229,85 @@ function nextImage(e) {
 // });
 
 closeButton.addEventListener("click", (e) => {
-  pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
-  for (i = 0; i < imagesStapel.length; i++) {
-    imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
-  }
-  stapelContainer.style.display = "none";
-  imagesStapel = [];
-  n = 0;
+    pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
+    for (i = 0; i < imagesStapel.length; i++) {
+        imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
+    }
+    stapelContainer.style.display = "none";
+    imagesStapel = [];
+    n = 0;
 });
 
 // ++++ About Seite und Header +++++++
 let tempCurr;
 
 title.addEventListener("mouseenter", (e) => {
-  if (stapelContainer.style.display != "block") {
-    tempCurr = pTitle.textContent;
+    if (stapelContainer.style.display != "block") {
+        tempCurr = pTitle.textContent;
 
-    pTitle.textContent = "Infos";
-  } else if (typeof infoText == "undefined") {
-    infoText = createNeuesElement("div", "pInfo", "pInfo");
-    stapelContainer.appendChild(infoText);
-    infoText.textContent = projekte[current].description;
-  }
+        pTitle.textContent = "Infos";
+    } else if (typeof infoText == "undefined") {
+        infoText = createNeuesElement("div", "pInfo", "pInfo");
+        stapelContainer.appendChild(infoText);
+        infoText.textContent = projekte[current].description;
+    }
 });
 title.addEventListener("mouseleave", (e) => {
-  if (stapelContainer.style.display != "block") {
-    pTitle.textContent = tempCurr;
-  } else if (typeof infoText != "undefined") {
-    infoText.parentNode.removeChild(infoText);
-    infoText = undefined;
-  }
+    if (stapelContainer.style.display != "block") {
+        pTitle.textContent = tempCurr;
+    } else if (typeof infoText != "undefined") {
+        infoText.parentNode.removeChild(infoText);
+        infoText = undefined;
+    }
 });
 
 title.addEventListener("click", (e) => {
-  if (stapelContainer.style.display != "block") {
-    tempCurr = pTitle.textContent;
-    aboutPage.style.display = "block";
-    pTitle.textContent = "Infos";
-    headBalken.style.pointerEvents = "none";
-  }
+    if (stapelContainer.style.display != "block") {
+        tempCurr = pTitle.textContent;
+        aboutPage.style.display = "block";
+        pTitle.textContent = "Infos";
+        headBalken.style.pointerEvents = "none";
+    }
 });
 
 aboutPage.addEventListener("click", (e) => {
-  if (stapelContainer.style.display != "block") {
-    aboutPage.style.display = "none";
-    pTitle.textContent = tempCurr;
-    headBalken.style.pointerEvents = "inherit";
-  }
+    if (stapelContainer.style.display != "block") {
+        aboutPage.style.display = "none";
+        pTitle.textContent = tempCurr;
+        headBalken.style.pointerEvents = "inherit";
+    }
 });
 
 // ++++++ Helferfunktionen ++++++
 
 function getRandomWinkel() {
-  let maxWinkel = 10;
-  let rWinkel = Math.floor(
-    Math.random() * Math.floor(maxWinkel * 2) - maxWinkel
-  );
-  return rWinkel + "deg";
+    let maxWinkel = 10;
+    let rWinkel = Math.floor(
+        Math.random() * Math.floor(maxWinkel * 2) - maxWinkel
+    );
+    return rWinkel + "deg";
 }
 
 function createNeuesElement(type, id, klasse) {
-  let elem = document.createElement(type);
-  elem.setAttribute("id", id);
-  elem.setAttribute("class", klasse);
-  return elem;
+    let elem = document.createElement(type);
+    elem.setAttribute("id", id);
+    elem.setAttribute("class", klasse);
+    return elem;
 }
 
 function checkScrollDirectionIsUp(event) {
-  if (event.wheelDelta) {
-    return event.wheelDelta > 0;
-  }
-  return event.deltaY < 0;
+    if (event.wheelDelta) {
+        return event.wheelDelta > 0;
+    }
+    return event.deltaY < 0;
 }
 
 function durchrotieren(arr) {
-  if (scrolldown) {
-    arr.unshift(arr[arr.length - 1]);
-    arr.pop();
-  } else {
-    arr.push(arr[0]);
-    arr.shift();
-  }
+    if (scrolldown) {
+        arr.unshift(arr[arr.length - 1]);
+        arr.pop();
+    } else {
+        arr.push(arr[0]);
+        arr.shift();
+    }
 }

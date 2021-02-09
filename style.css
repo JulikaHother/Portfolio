@@ -1,297 +1,343 @@
 @font-face {
-  font-family: "SnellRoundhand-Script";
-  src: url("assets/fonts/SnellRoundhand-Script.woff2") format("woff2"),
-    url("assets/fonts/SnellRoundhand-Script.woff") format("woff");
+    font-family: "Monument";
+    src: url("assets/fonts/ABCMonumentGrotesk-Regular.woff2") format("woff2"), url("assets/fonts/ABCMonumentGrotesk-Regular.woff") format("woff");
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 
-@font-face {
-  font-family: "PanamaMonospace-Regular";
-  src: url("assets/fonts/PanamaMonospace-Regular.woff2") format("woff2"),
-    url("assets/fonts/PanamaMonospace-Regular.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Monument";
-  src: url("assets/fonts/ABCMonumentGrotesk-Regular.woff2") format("woff2"),
-    url("assets/fonts/ABCMonumentGrotesk-Regular.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family: "Monument";
-  background-image: linear-gradient(
-    0deg,
-    rgba(197, 95, 88) 0%,
-    rgba(143, 76, 193) 32%,
-    rgba(205, 174, 195) 100%
-  );
-  font-size: 150%;
-  color: red;
-  cursor: url(assets/SVG/plus.png) 2 2, pointer;
+    font-family: "Monument";
+    background-color: #eae2fa;
+    font-size: 150%;
+    color: black;
+    cursor: url(assets/SVG/plus.png) 2 2, pointer;
 }
 
 .form {
-  position: fixed;
-  top: 50px;
-  height: calc(100% - 50px);
-  width: 100vw;
-  background: -webkit-linear-gradient(rgb(230, 116, 10), rgb(66, 150, 139));
-  box-shadow: inset 0px 0px 20px 50px rgb(235, 158, 128);
-  border-radius: 50%;
-  display: none;
+    position: fixed;
+    top: 50px;
+    height: calc(100% - 50px);
+    width: 100vw;
+    background: -webkit-linear-gradient(rgb(230, 116, 10), rgb(66, 150, 139));
+    box-shadow: inset 0px 0px 20px 50px rgb(235, 158, 128);
+    border-radius: 50%;
+    display: none;
 }
 
 .fixed-container {
-  /* position: fixed;
+    /* position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0; */
-  height: 100vh;
-  width: 100vw;
+    height: 100vh;
+    width: 100vw;
 }
 
 #head-balken {
-  display: inline-block;
-  position: absolute;
-  width: 100%;
-  /* height: 50px; */
-  background-color: rgb(180, 192, 231);
-  z-index: 1000;
-  color: red;
-  text-transform: uppercase;
-  cursor: url(assets/SVG/plus.png) 2 2, pointer;
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    /* height: 50px; */
+    background-color: rgb(180, 192, 231);
+    z-index: 1000;
+    color: red;
+    text-shadow: -0.5px 0 red, 0 0.5px red, 0.5px 0 red, 0 -1px red;
+    text-transform: uppercase;
+    cursor: url(assets/SVG/plus.png) 2 2, pointer;
 }
 
 .name {
-  padding: 10px 20px;
-
-  float: left;
-  font-family: "SnellRoundhand-Script";
+    padding: 10px 20px;
+    float: left;
 }
 
 .p-title {
-  padding: 0px 10px;
-
+    padding: 0px 10px;
 }
+
 #title-wrapper {
-  float: right;
-  padding: 10px 20px;
-
+    float: right;
+    padding: 10px 20px;
 }
+
 #closeButton {
-padding: 0;
-  cursor: pointer;
-  z-index: 250;
+    display: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 250;
 }
 
 #about {
-  display: none;
-  height: 100vh;
-  width: 100vw;
-  background-color: white;
-  mix-blend-mode: normal;
-  position: absolute;
-  z-index: 999;
-  color: black;
-  cursor: url(assets/SVG/close.png) 2 2, pointer;
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+    mix-blend-mode: normal;
+    position: absolute;
+    z-index: 999;
+    color: black;
+    cursor: url(assets/SVG/close.png) 2 2, pointer;
 }
 
 .headline {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  font-size: 8em;
-  text-align: center;
-  top: 30vh;
-  line-height: 1;
-  padding: 20px;
-  background: -webkit-linear-gradient(rgb(255, 123, 0), rgb(255, 115, 0));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0px 100px 20px rgb(235, 158, 128);
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    font-size: 8em;
+    text-align: center;
+    top: 30vh;
+    line-height: 1;
+    padding: 20px;
+    background: -webkit-linear-gradient(rgb(255, 123, 0), rgb(255, 115, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 100px 20px rgb(235, 158, 128);
+}
+
+.index {
+    position: fixed;
+    display: none;
+    z-index: 100;
+    width: 100vw;
+    height: calc(100% - 50px);
+    top: 50px;
+    color: white;
+    text-transform: uppercase;
+    /* align-items: center */
+}
+
+.index li {
+    display: grid;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 100%;
+    border-bottom: 2px solid white;
+    text-shadow: -0.5px 0 white, 0 0.5px white, 0.5px 0 white, 0 -1px white;
+    align-items: center;
+    grid-template-columns: auto auto auto;
+}
+
+.index li span {
+    display: inline-block;
+}
+
+.li-category {
+    margin-left: -50vw;
+    text-align: center;
+}
+
+.li-year {
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .index li {
+        grid-template-rows: auto auto;
+        grid-template-columns: 100%;
+    }
+    .index li span {
+        text-align: left;
+    }
+    .li-year {
+        display: none !important;
+    }
 }
 
 .projektbubble {
-  /* transform-origin: top left;
+    /* transform-origin: top left;
   transform: scale(0.7); */
-  /* width: 400px;
+    /* width: 400px;
   height: 400px; */
-  /* background-color: blue; */
-  width: 50vh;
-  left: 3vw;
-  top: 25vw;
-  position: fixed;
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0%;
-  cursor: pointer;
-  transform: translateY(49px);
-  /* display: none; */
-  /* border-radius: 100px;
+    /* background-color: blue; */
+    width: 50vh;
+    /* left: 3vw;
+    top: 25vw; */
+    display: block;
+    position: fixed;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0%;
+    cursor: pointer;
+    transform: translateY(49px);
+    /* -webkit-filter: blur(30px); 
+    filter: blur(30px); */
+    /* display: none; */
+    /* border-radius: 100px;
   background: -webkit-linear-gradient(red, darkorange); */
 }
+
+.hide {
+    display: none !important;
+}
+
 #samt {
-  /* width: 98vw;
-  height: 98vh;
-  top: 1vw;
-  left: 1vw; */
-  width: 100vw;
-  height: 100vh;
-  top: 0vw;
-  left: 0vw;
+    width: 100vw;
+    height: 100vh;
+    top: 1vh;
+    left: 0vw;
 }
 
 #samtetc {
-  width: 25vh;
-  top: 80vh;
-  left: 3vw;
+    height: 17vh;
+    width: auto;
+    bottom: 8vh;
+    top: inherit;
+    left: 3vw;
 }
 
 #Riso {
-  height: 80vh;
-  width: 90vw;
-  top: 15vh;
-  left: 10vw;
+    height: 58vh;
+    width: auto;
+    top: inherit;
+    bottom: 0vh;
+    right: 20vw;
 }
 
 #phd {
-  width: 20vw;
-  height: auto;
-  left: 60vw;
-  top: 20vh;
+    width: auto;
+    height: 20vh;
+    right: 10vw;
+    top: 15vh;
 }
 
 #nakefews {
-  height: 40vh;
-  width: auto;
-  top: 45vh;
-  left: 60vw;
+    height: 30vh;
+    width: auto;
+    bottom: 16vh;
+    right: 10vw;
 }
 
 #tamuz {
-  width: 15vw;
-  height: auto;
-  left: 80vw;
-  top: 45vh;
+    width: auto;
+    height: 60vh;
+    left: 0;
+    top: 12vh;
 }
 
 #hebtype {
-  width: 20vw;
-  height: auto;
-  top: 0;
-  left: 20vw;
+    width: 20vw;
+    height: auto;
+    top: 24vh;
+    right: 10vw;
 }
+
 #traum {
-  /* width: 95vw;
+    /* width: 95vw;
   height: 95vh;
   top: 3vh;
   left: 3vw; */
-  width: 100vw;
-  height: 100vh;
-  top: 0vh;
-  left: 0vw;
+    width: 100vw;
+    height: 100vh;
+    top: 0vh;
+    left: 0vw;
 }
+
 #brennes {
-  width: 20vw;
-  height: auto;
-  top: 0;
-  left: 60vw;
+    width: 20vw;
+    height: auto;
+    bottom: 30vh;
+    right: 10vw;
 }
 
 #holzschnitt {
-  width: 100vw;
-  height: 100vh;
-  top: 0vh;
-  left: 0vw;
+    width: 100vw;
+    height: 100vh;
+    top: 0vh;
+    left: 0vw;
 }
 
 #nichtjetzt {
-  width: 45vw;
-  height: auto;
-  top: 20vh;
-  left: 55vw;
+    width: 100vw;
+    height: auto;
+    top: 5vh;
 }
 
 #siebdruck {
-  width: 55vw;
-  height: auto;
-  top: 85vh;
-  left: 23vw;
+    width: auto;
+    height: 13vh;
+    bottom: 8vh;
+    right: 5vw;
+    left: inherit;
 }
 
 #wildwildweb {
-  top: 35vh;
-  left: 5vw;
+    width: 35vw;
+    height: auto;
+    top: 45vh;
+    left: 25vw;
 }
 
 #museum {
-  top: 2vh;
-  left: 60vw;
+    top: 2vh;
+    right: 1vw;
+    height: 65vh;
+    width: auto;
+}
+
+#christine {
+    height: 65vh;
+    width: auto;
+    top: 2vh;
+    left: 10vw;
 }
 
 #stapelcontainer {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  display: none;
-  z-index: 100;
-  cursor: url(assets/SVG/close-w.png) 2 2, pointer;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: none;
+    z-index: 100;
+    cursor: url(assets/SVG/close-w.png) 2 2, pointer;
 }
 
 .stapelBild {
-  /* left: 50%;
+    /* left: 50%;
   max-height: 70vh;
   max-width: 70vw;
   height: 70%;
   top: 50%; */
-  width: 500px;
-  position: absolute;
-  /* width: 80vw; */
+    width: 500px;
+    position: absolute;
+    /* width: 80vw; */
+    display: block;
+    object-fit: contain;
+    transform-origin: top left;
+    cursor: url(assets/SVG/plus.png) 2 2, pointer;
+}
 
-  display: block;
-  object-fit: contain;
-  transform-origin: top left;
-  cursor: url(assets/SVG/plus.png) 2 2, pointer;
-}
 .Stapeltext {
-  mix-blend-mode: exclusion;
-  font-size: 2em;
-  text-align: left;
-  padding: 50px 30px 30px 30px !important;
-  vertical-align: middle;
+    mix-blend-mode: exclusion;
+    font-size: 2em;
+    text-align: left;
+    padding: 50px 30px 30px 30px !important;
+    vertical-align: middle;
 }
+
 #pInfo {
-  margin-top: 50px;
-  padding: 10px 20px;
-  mix-blend-mode: difference;
+    margin-top: 50px;
+    padding: 10px 20px;
+    mix-blend-mode: difference;
 }
 
 ::selection {
-  background-color: none;
-  color: white;
+    background-color: none;
+    color: white;
 }
 
 #hebtype1 {
-  max-width: 50vw;
+    max-width: 50vw;
 }
