@@ -203,7 +203,7 @@ let projekte = {
         "description": "",
         "category": "",
         "year": "moin@julika-hother.de",
-        "background": "nichtjetzt.png",
+        "background": "",
         "images": []
     }
 }

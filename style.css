@@ -14,8 +14,12 @@
 body {
     font-family: "Monument";
     background-color: #eae2fa;
+    background-image: url("assets/images/infos.jpg");
+    background-size: contain;
+    background-position: 0px 50px;
     font-size: 150%;
     color: black;
+    background-repeat: no-repeat
 }
 
 .form {
