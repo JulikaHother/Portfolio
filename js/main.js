@@ -12,7 +12,8 @@ let headlineBG = document.querySelector(".headline");
 let closeButton = document.querySelector("#closeButton");
 let title = document.querySelector(".name");
 let imagesStapel = [];
-
+let currentProj = projBubbleElements[0];
+let currentValue;
 let table = document.querySelector(".index")
 
 
@@ -25,7 +26,7 @@ let scrollCounter = 0;
 
 let scrolldown;
 let pTitle = document.querySelector(".p-title");
-let startscreen = true;
+let projekteAktv = true;
 let headBalken = document.getElementById("head-balken");
 let aboutPage = document.getElementById("about");
 let infoText;
@@ -86,32 +87,50 @@ for (i = 0; i < projektKeys.length; i++) {
 
 }
 let counter = 0;
-let cb = 0
+let indexAktiv = false;
+let cb = -30
 for (i = 0; i < projektKeys.length; i++) {
     projBubbleElements[i].style.filter = "blur(" + cb + "px)";
 }
+let projektcounter = 0;
+let einzelblur = 0;
 
 document.addEventListener("wheel", (e) => {
 
     if (e.deltaY > 0) {
         scrolldown = true;
         counter++;
+
     } else {
         scrolldown = false;
         counter--;
     }
 
 
-    // console.log(counter);
     //++++++++  INDEX  +++++++++
-    if (scrolldown && cb > -10 && counter <= 0) {
+    if (scrolldown && cb >= -30 && projektcounter == 0) {
         cb = cb - 5;
-    } else if (cb < 50 && counter < 0 && counter <= 0) {
+    } else if (!scrolldown && cb <= 30 && projektcounter == 0) {
         cb = cb + 5;
     }
-    if (cb <= 30) {
+
+    if (cb > -30) {
+        indexAktiv = true;
+        projekteAktv = false;
+        if (cb > 0) {
+            changetitle("Index")
+        }
+        if (cb < 0) {
+            changetitle(projekte[current].title)
+        }
+    } else {
+        indexAktiv = false;
+        projekteAktv = true
+
+    }
+    if (cb <= 20) {
         table.style.display = "none";
-    } else if (cb >= 30) {
+    } else if (cb >= 20) {
         table.style.display = "grid";
     }
     for (i = 0; i < projektKeys.length; i++) {
@@ -119,51 +138,75 @@ document.addEventListener("wheel", (e) => {
     }
 
     //++++++++  POJIS  +++++++++
+    if (counter % 6 == 0) {
+        if (!indexAktiv) {
 
-    if (scrolldown && counter % 2 == 0 && counter >= 0) {
-        oberstesEntfernen()
-    } else if (!scrolldown && counter % 2 == 0 && counter >= 0) {
-        neuesAnzeigen()
+            nextProject()
+        }
+    } else {
+        if (scrolldown) {
+            einzelblur++
+        } else {
+            einzelblur--
+        }
+
+        projBubbleElements[projektcounter].style.filter = "blur(" + (einzelblur * 2 - 4) + "px)";
+
     }
-
-
 
 })
 
+function nextProject() {
+    if (scrolldown) {
+        stapelSchliessen()
+        oberstesEntfernen()
+        if (projektcounter != projBubbleElements.lenth - 1 && projektcounter < projBubbleElements.length) {
+            projektcounter++
+        }
+        einzelblur = 0;
+
+    } else if (!scrolldown) {
+        stapelSchliessen()
+
+        if (projektcounter != 0 && projektcounter <= projBubbleElements.length) {
+            projektcounter--
+        }
+        neuesAnzeigen()
+        einzelblur = 6;
+
+    }
+    current = projBubbleElements[projektcounter].id;
+
+    changetitle(projekte[current].title)
 
 
+
+}
 
 function oberstesEntfernen() {
 
     for (let i = 0; i < projBubbleElements.length; i++) {
         const element = projBubbleElements[i];
-        if (!element.classList.contains("hide") && element != projBubbleElements[projBubbleElements.length]) {
+
+        if (projektcounter == i) {
             element.classList.add("hide")
-            return;
-        } else if (element == projBubbleElements[projBubbleElements.length - 2]) {
-            console.log(projBubbleElements.length - 1);
-            return
-
         }
-        console.log(i);
     }
-
 
 
 }
 
 function neuesAnzeigen() {
 
+
+
     for (let i = 0; i < projBubbleElements.length; i++) {
         const element = projBubbleElements[i];
-        if (!element.classList.contains("hide")) {
-            projBubbleElements[i - 1].classList.remove("hide");
-            return;
+
+        if (projektcounter == i) {
+            element.classList.remove("hide")
         }
-
     }
-
-
 }
 
 
@@ -171,9 +214,9 @@ function neuesAnzeigen() {
 // ++++++++ Stapel öffnen ++++++++
 
 container.addEventListener("click", (e) => {
-    current = projBubbleElements[projBubbleElements.length - 1].id;
 
-    if (n == 0 && !startscreen && projekte[current].images[0]) {
+
+    if (n == 0 && projekteAktv && projekte[current].images[0]) {
         pTitle.innerHTML = pfeil + pTitle.textContent;
         nextImage(e);
 
@@ -228,14 +271,12 @@ function nextImage(e) {
 //   }
 // });
 
+
+
 closeButton.addEventListener("click", (e) => {
-    pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
-    for (i = 0; i < imagesStapel.length; i++) {
-        imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
-    }
-    stapelContainer.style.display = "none";
-    imagesStapel = [];
-    n = 0;
+    stapelSchliessen()
+    console.log("hhojojoojj");
+
 });
 
 // ++++ About Seite und Header +++++++
@@ -310,4 +351,21 @@ function durchrotieren(arr) {
         arr.push(arr[0]);
         arr.shift();
     }
+}
+
+function stapelSchliessen() {
+
+    pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
+    for (i = 0; i < imagesStapel.length; i++) {
+        imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
+    }
+    stapelContainer.style.display = "none";
+    imagesStapel = [];
+    n = 0;
+
+
+}
+
+function changetitle(input) {
+    pTitle.textContent = input
 }

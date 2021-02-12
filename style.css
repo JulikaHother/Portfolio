@@ -44,7 +44,7 @@ body {
     display: inline-block;
     position: absolute;
     width: 100%;
-    /* height: 50px; */
+    height: 50px;
     background-color: rgb(180, 192, 231);
     z-index: 1000;
     color: red;
@@ -208,24 +208,26 @@ body {
 }
 
 #nakefews {
-    height: 30vh;
-    width: auto;
-    bottom: 16vh;
-    right: 10vw;
+    width: 40vh;
+    max-width: 80vw;
+    height: auto;
+    bottom: 25vh;
+    left: 15vw;
 }
 
 #tamuz {
     width: auto;
+    max-width: 80vw;
     height: 60vh;
     left: 0;
     top: 12vh;
 }
 
 #hebtype {
-    width: 20vw;
+    width: 70vw;
     height: auto;
-    top: 24vh;
-    right: 10vw;
+    top: 0;
+    right: 0;
 }
 
 #traum {
@@ -264,7 +266,7 @@ body {
     height: 13vh;
     bottom: 8vh;
     right: 5vw;
-    left: inherit;
+    max-width: 90vw;
 }
 
 #wildwildweb {
@@ -282,10 +284,11 @@ body {
 }
 
 #christine {
-    height: 65vh;
-    width: auto;
-    top: 2vh;
-    left: 10vw;
+    width: 90vw;
+    height: auto;
+    max-height: 90vh;
+    top: 0;
+    left: 5vw;
 }
 
 #stapelcontainer {
@@ -336,8 +339,4 @@ body {
 ::selection {
     background-color: none;
     color: white;
-}
-
-#hebtype1 {
-    max-width: 50vw;
 }
