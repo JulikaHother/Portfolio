@@ -29,14 +29,6 @@ let projekte = {
 
         ]
     },
-    "brennes": {
-        "title": "Du brennst es",
-        "description": "",
-        "category": "Exhibition Booklet",
-        "year": "2020",
-        "background": "brennes.png",
-        "images": []
-    },
     "siebdruck": {
         "title": "La mer de Mars",
         "description": "",
@@ -203,6 +195,14 @@ let projekte = {
         "description": "",
         "category": "Magazine",
         "year": "2018",
+        "background": "nichtjetzt.png",
+        "images": []
+    },
+    "julul": {
+        "title": "Infos",
+        "description": "",
+        "category": "",
+        "year": "moin@julika-hother.de",
         "background": "nichtjetzt.png",
         "images": []
     }

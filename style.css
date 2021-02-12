@@ -16,7 +16,6 @@ body {
     background-color: #eae2fa;
     font-size: 150%;
     color: black;
-    cursor: url(assets/SVG/plus.png) 2 2, pointer;
 }
 
 .form {
@@ -50,7 +49,6 @@ body {
     color: red;
     text-shadow: -0.5px 0 red, 0 0.5px red, 0.5px 0 red, 0 -1px red;
     text-transform: uppercase;
-    cursor: url(assets/SVG/plus.png) 2 2, pointer;
 }
 
 .name {
@@ -59,7 +57,7 @@ body {
 }
 
 .p-title {
-    padding: 0px 10px;
+    /* padding: 0px 10px; */
 }
 
 #title-wrapper {
@@ -83,7 +81,6 @@ body {
     position: absolute;
     z-index: 999;
     color: black;
-    cursor: url(assets/SVG/close.png) 2 2, pointer;
 }
 
 .headline {
@@ -159,6 +156,8 @@ body {
     width: 50vh;
     /* left: 3vw;
     top: 25vw; */
+    max-width: 100vw;
+    max-height: 100vh;
     display: block;
     position: fixed;
     text-align: center;
@@ -284,10 +283,10 @@ body {
 }
 
 #christine {
-    width: 90vw;
+    width: 80vw;
     height: auto;
-    max-height: 90vh;
-    top: 0;
+    max-height: 100vh;
+    top: -5vh;
     left: 5vw;
 }
 
@@ -304,7 +303,6 @@ body {
     bottom: 0;
     display: none;
     z-index: 100;
-    cursor: url(assets/SVG/close-w.png) 2 2, pointer;
 }
 
 .stapelBild {
@@ -319,7 +317,6 @@ body {
     display: block;
     object-fit: contain;
     transform-origin: top left;
-    cursor: url(assets/SVG/plus.png) 2 2, pointer;
 }
 
 .Stapeltext {
@@ -339,4 +336,9 @@ body {
 ::selection {
     background-color: none;
     color: white;
+}
+
+#index-julul {
+    color: rgb(180, 192, 231);
+    text-shadow: -0.5px 0 rgb(180, 192, 231), 0 0.5px rgb(180, 192, 231), 0.5px 0 rgb(180, 192, 231), 0 -1px rgb(180, 192, 231);
 }

@@ -15,6 +15,7 @@ let imagesStapel = [];
 let currentProj = projBubbleElements[0];
 let currentValue;
 let table = document.querySelector(".index")
+let blurriness = 0
 
 
 let n = 0;
@@ -86,9 +87,11 @@ for (i = 0; i < projektKeys.length; i++) {
     indexrows[i].querySelector(".li-category").style.paddingLeft = r + "vw";
 
 }
+
+// +++++++ Durchscrollen ++++++
 let counter = 0;
 let indexAktiv = false;
-let cb = -30
+let cb = 20
 for (i = 0; i < projektKeys.length; i++) {
     projBubbleElements[i].style.filter = "blur(" + cb + "px)";
 }
@@ -116,11 +119,11 @@ document.addEventListener("wheel", (e) => {
 
     if (cb > -30) {
         indexAktiv = true;
-        projekteAktv = false;
+        projekteAktiv = false;
         if (cb > 0) {
             changetitle("Index")
         }
-        if (cb < 0) {
+        if (cb < 0 && projekte[current]) {
             changetitle(projekte[current].title)
         }
     } else {
@@ -128,20 +131,24 @@ document.addEventListener("wheel", (e) => {
         projekteAktv = true
 
     }
-    if (cb <= 20) {
+    if (cb <= 30) {
         table.style.display = "none";
-    } else if (cb >= 20) {
+    } else if (cb >= 30) {
         table.style.display = "grid";
     }
     for (i = 0; i < projektKeys.length; i++) {
-        projBubbleElements[i].style.filter = "blur(" + cb + "px)";
+        projBubbleElements[i].style.filter = "blur(" + (cb - 5) + "px)";
     }
 
     //++++++++  POJIS  +++++++++
+    removeBlur()
+    stapelSchliessen()
+
+
     if (counter % 6 == 0) {
         if (!indexAktiv) {
-
             nextProject()
+
         }
     } else {
         if (scrolldown) {
@@ -156,9 +163,11 @@ document.addEventListener("wheel", (e) => {
 
 })
 
+
+
+
 function nextProject() {
     if (scrolldown) {
-        stapelSchliessen()
         oberstesEntfernen()
         if (projektcounter != projBubbleElements.lenth - 1 && projektcounter < projBubbleElements.length) {
             projektcounter++
@@ -166,8 +175,6 @@ function nextProject() {
         einzelblur = 0;
 
     } else if (!scrolldown) {
-        stapelSchliessen()
-
         if (projektcounter != 0 && projektcounter <= projBubbleElements.length) {
             projektcounter--
         }
@@ -178,13 +185,9 @@ function nextProject() {
     current = projBubbleElements[projektcounter].id;
 
     changetitle(projekte[current].title)
-
-
-
 }
 
 function oberstesEntfernen() {
-
     for (let i = 0; i < projBubbleElements.length; i++) {
         const element = projBubbleElements[i];
 
@@ -192,14 +195,9 @@ function oberstesEntfernen() {
             element.classList.add("hide")
         }
     }
-
-
 }
 
 function neuesAnzeigen() {
-
-
-
     for (let i = 0; i < projBubbleElements.length; i++) {
         const element = projBubbleElements[i];
 
@@ -215,6 +213,7 @@ function neuesAnzeigen() {
 
 container.addEventListener("click", (e) => {
 
+    addBlur();
 
     if (n == 0 && projekteAktv && projekte[current].images[0]) {
         pTitle.innerHTML = pfeil + pTitle.textContent;
@@ -223,6 +222,8 @@ container.addEventListener("click", (e) => {
         stapelContainer.style.display = "block";
     }
 });
+
+// +++ weitere Bilder anzeigen ++++++
 
 stapelContainer.addEventListener("click", (e) => {
     if (n < projekte[current].images.length) {
@@ -257,67 +258,52 @@ function nextImage(e) {
     n++;
 }
 
-// ++++++++ Stapel schließen ++++++++
-
-// stapelContainer.addEventListener("click", (e) => {
-//   if (e.target == stapelContainer) {
-//     pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
-//     for (i = 0; i < imagesStapel.length; i++) {
-//       imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
-//     }
-//     stapelContainer.style.display = "none";
-//     imagesStapel = [];
-//     n = 0;
-//   }
-// });
-
 
 
 closeButton.addEventListener("click", (e) => {
     stapelSchliessen()
-    console.log("hhojojoojj");
 
 });
 
 // ++++ About Seite und Header +++++++
-let tempCurr;
+// let tempCurr;
 
-title.addEventListener("mouseenter", (e) => {
-    if (stapelContainer.style.display != "block") {
-        tempCurr = pTitle.textContent;
+// title.addEventListener("mouseenter", (e) => {
+//     if (stapelContainer.style.display != "block") {
+//         tempCurr = pTitle.textContent;
 
-        pTitle.textContent = "Infos";
-    } else if (typeof infoText == "undefined") {
-        infoText = createNeuesElement("div", "pInfo", "pInfo");
-        stapelContainer.appendChild(infoText);
-        infoText.textContent = projekte[current].description;
-    }
-});
-title.addEventListener("mouseleave", (e) => {
-    if (stapelContainer.style.display != "block") {
-        pTitle.textContent = tempCurr;
-    } else if (typeof infoText != "undefined") {
-        infoText.parentNode.removeChild(infoText);
-        infoText = undefined;
-    }
-});
+//         pTitle.textContent = "Infos";
+//     } else if (typeof infoText == "undefined") {
+//         infoText = createNeuesElement("div", "pInfo", "pInfo");
+//         stapelContainer.appendChild(infoText);
+//         infoText.textContent = projekte[current].description;
+//     }
+// });
+// title.addEventListener("mouseleave", (e) => {
+//     if (stapelContainer.style.display != "block") {
+//         pTitle.textContent = tempCurr;
+//     } else if (typeof infoText != "undefined") {
+//         infoText.parentNode.removeChild(infoText);
+//         infoText = undefined;
+//     }
+// });
 
-title.addEventListener("click", (e) => {
-    if (stapelContainer.style.display != "block") {
-        tempCurr = pTitle.textContent;
-        aboutPage.style.display = "block";
-        pTitle.textContent = "Infos";
-        headBalken.style.pointerEvents = "none";
-    }
-});
+// title.addEventListener("click", (e) => {
+//     if (stapelContainer.style.display != "block") {
+//         tempCurr = pTitle.textContent;
+//         aboutPage.style.display = "block";
+//         pTitle.textContent = "Infos";
+//         headBalken.style.pointerEvents = "none";
+//     }
+// });
 
-aboutPage.addEventListener("click", (e) => {
-    if (stapelContainer.style.display != "block") {
-        aboutPage.style.display = "none";
-        pTitle.textContent = tempCurr;
-        headBalken.style.pointerEvents = "inherit";
-    }
-});
+// aboutPage.addEventListener("click", (e) => {
+//     if (stapelContainer.style.display != "block") {
+//         aboutPage.style.display = "none";
+//         pTitle.textContent = tempCurr;
+//         headBalken.style.pointerEvents = "inherit";
+//     }
+// });
 
 // ++++++ Helferfunktionen ++++++
 
@@ -368,4 +354,37 @@ function stapelSchliessen() {
 
 function changetitle(input) {
     pTitle.textContent = input
+}
+
+
+
+
+function addBlur() {
+
+    let addAnimation = setInterval(() => {
+        console.log(blurriness);
+
+        if (blurriness < 20) {
+            blurriness += 4
+            for (i = 0; i < projektKeys.length; i++) {
+                projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
+            }
+        } else {
+            clearInterval(addAnimation)
+        }
+    }, 20)
+}
+
+function removeBlur() {
+    let removeAnimation = setInterval(() => {
+        if (blurriness > 0) {
+            blurriness -= 4
+            for (i = 0; i < projektKeys.length; i++) {
+                projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
+            }
+        } else {
+            clearInterval(removeAnimation)
+
+        }
+    }, 20)
 }
