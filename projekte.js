@@ -197,13 +197,5 @@ let projekte = {
         "year": "2018",
         "background": "nichtjetzt.png",
         "images": []
-    },
-    "julul": {
-        "title": "Infos",
-        "description": "",
-        "category": "",
-        "year": "moin@julika-hother.de",
-        "background": "",
-        "images": []
     }
 }
