@@ -1,4 +1,4 @@
-projektKeys = Object.keys(projekte);
+projektTitles = Object.keys(projekte);
 projectValues = Object.values(projekte);
 let randomPosX;
 let randomPosY;
@@ -28,21 +28,21 @@ let pfeil = "↓ &nbsp;&nbsp;&nbsp;";
 
 // ++++++ Elemente generieren +++++++++
 
-for (i = 0; i < projektKeys.length; i++) {
+for (i = 0; i < projektTitles.length; i++) {
   projBubbleElements[i] = createNeuesElement(
     "img",
-    projektKeys[i],
+    projektTitles[i],
     "projektbubble"
   );
   container.appendChild(projBubbleElements[i]);
 
-  r = Math.floor(Math.random() * Math.floor(projektKeys.length));
+  r = Math.floor(Math.random() * Math.floor(projektTitles.length));
 
   projBubbleElements[i].src =
     "assets/images/hintergrund/" + projectValues[i].background;
   projBubbleElements[i].style.zIndex = r;
 
-  projBubbleElements[i].innerHTML = projektKeys[i];
+  projBubbleElements[i].innerHTML = projektTitles[i];
   for (let i = 0; i < projBubbleElements.length; i++) {
     const element = projBubbleElements[i];
     if (i < projBubbleElements.length - 5) {

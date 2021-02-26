@@ -1,4 +1,4 @@
-projektKeys = Object.keys(projekte);
+projektTitles = Object.keys(projekte);
 projectValues = Object.values(projekte);
 let randomPosX;
 let randomPosY;
@@ -18,7 +18,6 @@ let table = document.querySelector(".index");
 let blurriness = 0;
 
 let n = 0;
-let current;
 let stapelText;
 let scrollN = 0;
 let scrollFaktor = 500;
@@ -26,38 +25,46 @@ let scrollCounter = 0;
 
 let scrolldown;
 let pTitle = document.querySelector(".p-title");
-let projekteAktv = true;
 let headBalken = document.getElementById("head-balken");
 let aboutPage = document.getElementById("about");
 let infoText;
 let pfeil = "↓ &nbsp;&nbsp;&nbsp;";
 
+let projektcounter = 0;
+let counter = 0;
+let indexAktiv = false;
+let stapelOffen = false;
+let cb = 20;
+let einzelblur = 0;
+let blurfaktor = 10;
+var lastScroll = 0;
+
 // ++++++ Elemente generieren +++++++++
 
-for (i = 0; i < projektKeys.length; i++) {
+for (i = 0; i < projektTitles.length; i++) {
   projBubbleElements[i] = createNeuesElement(
     "img",
-    projektKeys[i],
+    projektTitles[i],
     "projektbubble"
   );
   container.appendChild(projBubbleElements[i]);
 
   projBubbleElements[i].src =
     "assets/images/hintergrund/" + projectValues[i].background;
-  projBubbleElements[i].style.zIndex = projektKeys.length - i;
+  projBubbleElements[i].style.zIndex = projektTitles.length - i;
 
-  projBubbleElements[i].innerHTML = projektKeys[i];
+  projBubbleElements[i].innerHTML = projektTitles[i];
 
   indexrows[i] = createNeuesElement(
     "li",
-    "index-" + projektKeys[i],
+    "index-" + projektTitles[i],
     "index-row"
   );
   table.appendChild(indexrows[i]);
 
   let tempTitle = createNeuesElement(
     "span",
-    "title-" + projektKeys[i],
+    "title-" + projektTitles[i],
     "li-title"
   );
   indexrows[i].appendChild(tempTitle);
@@ -66,7 +73,7 @@ for (i = 0; i < projektKeys.length; i++) {
 
   let tempCat = createNeuesElement(
     "span",
-    "category-" + projektKeys[i],
+    "category-" + projektTitles[i],
     "li-category"
   );
   indexrows[i].appendChild(tempCat);
@@ -75,7 +82,7 @@ for (i = 0; i < projektKeys.length; i++) {
 
   let tempYear = createNeuesElement(
     "span",
-    "year-" + projektKeys[i],
+    "year-" + projektTitles[i],
     "li-year"
   );
   indexrows[i].appendChild(tempYear);
@@ -92,22 +99,32 @@ tempStr =
   '<li id="index-info" class="index-row"><span id="title-phd" class="li-title">Info</span><span id="year-phd" class="li-year">mail@julikahother.de</span></li>';
 table.innerHTML = tempStr;
 
-// +++++++ Durchscrollen ++++++
-let counter = 0;
-let indexAktiv = false;
-let cb = 20;
-for (i = 0; i < projektKeys.length; i++) {
-  projBubbleElements[i].style.filter = "blur(" + cb + "px)";
-}
-let projektcounter = 0;
-let einzelblur = 0;
-let speed = 6;
-let blurfaktor = 5;
-var lastScroll = 0;
-let dir;
+// ++++ Durchjumpen ++++++
 
+table.addEventListener("click", (e) => {
+  let target = Array.from(e.path)
+    .find((element) => element.classList.contains("index-row"))
+    .id.replaceAll("index-", "");
+
+  for (const i in projektTitles) {
+    if (projektTitles[i] == target) {
+      projektcounter = i;
+      changetitle(projekte[target].title);
+      updateProjVisibility(projektcounter);
+      removeIndex();
+    }
+  }
+});
+
+// +++++++ Durchscrollen ++++++
+
+// for (i = 0; i < projektTitles.length; i++) {
+//   projBubbleElements[i].style.filter = "blur(" + cb + "px)";
+// }
+let indexcounter = 0;
 document.addEventListener("wheel", (e) => {
-  if (Date.now() - lastScroll > 50) {
+  if (Date.now() - lastScroll > 40) {
+    console.log(indexAktiv);
     if (e.deltaY > 0) {
       scrolldown = true;
       counter++;
@@ -116,147 +133,137 @@ document.addEventListener("wheel", (e) => {
       counter--;
     }
 
-    //++++++++  INDEX  +++++++++
-    if (scrolldown && cb >= -30 && projektcounter == 0) {
-      cb = cb - 5;
-    } else if (!scrolldown && cb <= 30 && projektcounter == 0) {
-      cb = cb + 5;
-    }
-
-    if (cb > -30) {
-      indexAktiv = true;
-      projekteAktiv = false;
-      if (cb > 0) {
-        changetitle("Index");
-      }
-      if (cb < 0 && projekte[current]) {
-        changetitle(projekte[current].title);
-      }
-    } else {
-      indexAktiv = false;
-      projekteAktv = true;
-    }
-    if (cb <= 30) {
-      table.style.display = "none";
-    } else if (cb >= 30) {
-      table.style.display = "grid";
-    }
-    for (i = 0; i < projektKeys.length; i++) {
-      projBubbleElements[i].style.filter = "blur(" + (cb - 5) + "px)";
-    }
-
     //++++++++  POJIS  +++++++++
-    removeBlur();
-    stapelSchliessen();
 
-    if (!indexAktiv) {
-      if (counter % 6 == 0) {
+    if (!stapelOffen) {
+      if (counter % 4 == 0) {
         nextProject();
-      } else {
-        if (scrolldown) {
-          einzelblur++;
-        } else {
-          einzelblur--;
-        }
       }
-
-      projBubbleElements[projektcounter].style.filter =
-        "blur(" + Math.max(0, einzelblur * blurfaktor) + "px)";
-    //   if (dir > 0.5 && ![4,5,6].includes(projektcounter)) {
-    //     projBubbleElements[projektcounter].style.transform =
-    //       "translateX(" + Math.min(0,-einzelblur * blurfaktor) + "px)";
-    //   } else if(![4,5,6].includes(projektcounter)){
-    //     projBubbleElements[projektcounter].style.transform =
-    //     "translateX(" + Math.max(0,einzelblur * blurfaktor) + "px)";    
-    //   }
+      if (scrolldown) {
+        einzelblur++;
+      } else {
+        einzelblur--;
+      }
+      if (projektcounter >= 0) {
+        projBubbleElements[projektcounter].style.filter =
+          "blur(" + Math.max(0, einzelblur * blurfaktor) + "px)";
+      }
     }
 
+    if (!indexAktiv && stapelOffen) {
+      removeBlur();
+      stapelSchliessen();
+    }
+
+    //++++++++  INDEX  +++++++++
+
+    // if (counter < 0 && !indexAktiv && !scrolldown) {
+    //   showIndex();
+    // } else if (counter < 0 && indexAktiv && scrolldown) {
+    //   removeIndex();
+    // }
     lastScroll = Date.now();
-    console.log(projektcounter);
   }
 });
 
 function nextProject() {
   if (scrolldown) {
-    oberstesEntfernen();
-    if (projektcounter < projBubbleElements.length - 2) {
-      projektcounter++;
-    }
-    einzelblur = -1;
-    dir = Math.random();
+    if (!isLastProj()) projektcounter++;
+    einzelblur = -2;
   } else if (!scrolldown) {
-    if (projektcounter > 0) {
-      projektcounter--;
-    }
-    neuesAnzeigen();
-    einzelblur = 5;
-    dir = Math.random();
+    if (projektcounter >= 0) projektcounter--;
+    einzelblur = 2;
   }
-  current = projBubbleElements[projektcounter].id;
-  changetitle(projekte[current].title);
 
-  
-}
-
-function oberstesEntfernen() {
-  for (let i = 0; i < projBubbleElements.length; i++) {
-    const element = projBubbleElements[i];
-
-    if (projektcounter == i) {
-      element.classList.add("hide");
-    }
-  }
-}
-
-function neuesAnzeigen() {
-  for (let i = 0; i < projBubbleElements.length; i++) {
-    const element = projBubbleElements[i];
-
-    if (projektcounter == i) {
-      element.classList.remove("hide");
-    }
+  if (projektcounter == -1) {
+    showIndex();
+  } else {
+    removeIndex();
+    updateProjVisibility(projektcounter);
   }
 }
 
 // ++++++++ Stapel öffnen ++++++++
 
 container.addEventListener("click", (e) => {
-  addBlur();
-
-  if (n == 0 && projekteAktv && projekte[current].images[0]) {
-    pTitle.innerHTML = pfeil + pTitle.textContent;
-    nextImage(e);
-
-    stapelContainer.style.display = "block";
-  }
+  stapeloeffnen(e);
 });
 
 // +++ weitere Bilder anzeigen ++++++
+let zi = 10;
 
 stapelContainer.addEventListener("click", (e) => {
-  if (n < projekte[current].images.length) {
+  if (n < projekte[getCurrentId()].images.length) {
     nextImage(e);
+  } else if (e.target.classList.contains("stapelBild")) {
+    zi++;
+    e.target.style.zIndex = zi;
   }
 });
 
+closeButton.addEventListener("click", (e) => {
+  stapelSchliessen();
+});
+
+// ++++++ Helferfunktionen ++++++
+
+function updateProjVisibility(projektcounter) {
+  for (let i = 0; i < projBubbleElements.length; i++) {
+    const element = projBubbleElements[i];
+    i >= projektcounter
+      ? element.classList.remove("hide")
+      : element.classList.add("hide");
+  }
+  changetitle(projekte[getCurrentId()].title);
+}
+
+function stapelSchliessen() {
+  pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
+  for (i = 0; i < imagesStapel.length; i++) {
+    imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
+  }
+  stapelContainer.style.display = "none";
+  imagesStapel = [];
+  n = 0;
+  stapelOffen = false;
+}
+
+function stapeloeffnen(e) {
+  if (n == 0 && projekte[getCurrentId()].images[0]) {
+    // pTitle.innerHTML = pfeil + pTitle.textContent;
+    addBlur(nextImage, e);
+
+    stapelContainer.style.display = "block";
+  }
+  stapelOffen = true;
+}
+
 function nextImage(e) {
-  imagesStapel[n] = createNeuesElement("img", current + n, "stapelBild");
+  imagesStapel[n] = createNeuesElement("img", getCurrentId() + n, "stapelBild");
 
   imagesStapel[n].src =
-    "assets/images/" + current + "/" + projekte[current].images[n];
+    "assets/images/" +
+    getCurrentId() +
+    "/" +
+    projekte[getCurrentId()].images[n];
   imagesStapel[n].style.transform =
     "rotate(" + getRandomWinkel() + ") translateY(-50%) translateX(-50%)";
-  if (e.x < 250) {
-    imagesStapel[n].style.left = 280;
-  } else if (e.x > windowWidth - 250) {
-    imagesStapel[n].style.left = windowWidth - 280;
+
+  let padding = 80;
+  let breite = windowWidth / 4 + padding;
+  let hoehe = windowHeight / 4 + padding;
+
+  if (e.x < breite) {
+    imagesStapel[n].style.left = breite;
+  } else if (e.x > windowWidth - breite) {
+    imagesStapel[n].style.left = windowWidth - breite;
   } else {
     imagesStapel[n].style.left = e.x;
   }
-  if (e.y < 300) {
-    imagesStapel[n].style.top = 330;
-  } else if (e.y > windowHeight - 250) {
-    imagesStapel[n].style.top = windowHeight - 280;
+  if (e.y < hoehe + 50) {
+    imagesStapel[n].style.top = hoehe + 50;
+  } else if (e.y > windowHeight - hoehe) {
+    imagesStapel[n].style.top = windowHeight - hoehe;
   } else {
     imagesStapel[n].style.top = e.y;
   }
@@ -266,54 +273,15 @@ function nextImage(e) {
   n++;
 }
 
-closeButton.addEventListener("click", (e) => {
-  stapelSchliessen();
-});
-
-// ++++ About Seite und Header +++++++
-// let tempCurr;
-
-// title.addEventListener("mouseenter", (e) => {
-//     if (stapelContainer.style.display != "block") {
-//         tempCurr = pTitle.textContent;
-
-//         pTitle.textContent = "Infos";
-//     } else if (typeof infoText == "undefined") {
-//         infoText = createNeuesElement("div", "pInfo", "pInfo");
-//         stapelContainer.appendChild(infoText);
-//         infoText.textContent = projekte[current].description;
-//     }
-// });
-// title.addEventListener("mouseleave", (e) => {
-//     if (stapelContainer.style.display != "block") {
-//         pTitle.textContent = tempCurr;
-//     } else if (typeof infoText != "undefined") {
-//         infoText.parentNode.removeChild(infoText);
-//         infoText = undefined;
-//     }
-// });
-
-// title.addEventListener("click", (e) => {
-//     if (stapelContainer.style.display != "block") {
-//         tempCurr = pTitle.textContent;
-//         aboutPage.style.display = "block";
-//         pTitle.textContent = "Infos";
-//         headBalken.style.pointerEvents = "none";
-//     }
-// });
-
-// aboutPage.addEventListener("click", (e) => {
-//     if (stapelContainer.style.display != "block") {
-//         aboutPage.style.display = "none";
-//         pTitle.textContent = tempCurr;
-//         headBalken.style.pointerEvents = "inherit";
-//     }
-// });
-
-// ++++++ Helferfunktionen ++++++
-
 function isLastProj() {
-  if (projektcounter == projBubbleElements.length - 2) {
+  if (projektcounter == projBubbleElements.length - 1) {
+    return true;
+  } else {
+    return false;
+  }
+}
+function isFirstProj() {
+  if (projektcounter == 0) {
     return true;
   } else {
     return false;
@@ -352,29 +320,20 @@ function durchrotieren(arr) {
   }
 }
 
-function stapelSchliessen() {
-  pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
-  for (i = 0; i < imagesStapel.length; i++) {
-    imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
-  }
-  stapelContainer.style.display = "none";
-  imagesStapel = [];
-  n = 0;
-}
-
 function changetitle(input) {
   pTitle.textContent = input;
 }
 
-function addBlur() {
+function addBlur(callback, x) {
   let addAnimation = setInterval(() => {
     if (blurriness < 20) {
       blurriness += 4;
-      for (i = 0; i < projektKeys.length; i++) {
+      for (i = 0; i < projektTitles.length; i++) {
         projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
       }
     } else {
       clearInterval(addAnimation);
+      callback(x);
     }
   }, 20);
 }
@@ -383,11 +342,31 @@ function removeBlur() {
   let removeAnimation = setInterval(() => {
     if (blurriness > 0) {
       blurriness -= 4;
-      for (i = 0; i < projektKeys.length; i++) {
+      for (i = 0; i < projektTitles.length; i++) {
         projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
       }
     } else {
       clearInterval(removeAnimation);
     }
   }, 20);
+}
+
+function showIndex() {
+  if (indexAktiv) return;
+  addBlur(() => {
+    table.style.display = "grid";
+  });
+  indexAktiv = !indexAktiv;
+}
+function removeIndex() {
+  if (!indexAktiv) return;
+
+  table.style.display = "none";
+
+  removeBlur();
+  indexAktiv = !indexAktiv;
+}
+
+function getCurrentId() {
+  return projBubbleElements[projektcounter].id;
 }
