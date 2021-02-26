@@ -37,7 +37,6 @@ let projekte = {
         "background": "siebdruck.png",
         "images": [
             "siebdruck0.jpg",
-            "siebdruck1.jpg"
         ]
     },
     "traum": {
