@@ -19,7 +19,10 @@ body {
     background-position: 0px 50px;
     font-size: 150%;
     color: black;
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    height: 100%;
+    overflow: hidden;
+
 }
 
 .form {
@@ -244,6 +247,10 @@ body {
     left: 0vw;
 }
 
+#traum svg{
+    height: 100%;;
+}
+
 #brennes {
     width: 20vw;
     height: auto;
@@ -323,7 +330,7 @@ body {
     transform-origin: top left;
 }
 
-.Stapeltext {
+.Stapeltext {   
     mix-blend-mode: exclusion;
     font-size: 2em;
     text-align: left;
@@ -342,7 +349,7 @@ body {
     color: white;
 }
 
-#index-julul {
+#index-info{
     color: rgb(180, 192, 231);
     text-shadow: -0.5px 0 rgb(180, 192, 231), 0 0.5px rgb(180, 192, 231), 0.5px 0 rgb(180, 192, 231), 0 -1px rgb(180, 192, 231);
 }

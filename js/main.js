@@ -14,9 +14,8 @@ let title = document.querySelector(".name");
 let imagesStapel = [];
 let currentProj = projBubbleElements[0];
 let currentValue;
-let table = document.querySelector(".index")
-let blurriness = 0
-
+let table = document.querySelector(".index");
+let blurriness = 0;
 
 let n = 0;
 let current;
@@ -36,233 +35,239 @@ let pfeil = "↓ &nbsp;&nbsp;&nbsp;";
 // ++++++ Elemente generieren +++++++++
 
 for (i = 0; i < projektKeys.length; i++) {
-    projBubbleElements[i] = createNeuesElement(
-        "img",
-        projektKeys[i],
-        "projektbubble"
-    );
-    container.appendChild(projBubbleElements[i]);
+  projBubbleElements[i] = createNeuesElement(
+    "img",
+    projektKeys[i],
+    "projektbubble"
+  );
+  container.appendChild(projBubbleElements[i]);
 
-    projBubbleElements[i].src =
-        "assets/images/hintergrund/" + projectValues[i].background;
-    projBubbleElements[i].style.zIndex = projektKeys.length - i;
+  projBubbleElements[i].src =
+    "assets/images/hintergrund/" + projectValues[i].background;
+  projBubbleElements[i].style.zIndex = projektKeys.length - i;
 
-    projBubbleElements[i].innerHTML = projektKeys[i];
+  projBubbleElements[i].innerHTML = projektKeys[i];
 
-    indexrows[i] = createNeuesElement(
-        "li",
-        "index-" + projektKeys[i],
-        "index-row"
-    );
-    table.appendChild(indexrows[i]);
+  indexrows[i] = createNeuesElement(
+    "li",
+    "index-" + projektKeys[i],
+    "index-row"
+  );
+  table.appendChild(indexrows[i]);
 
-    let tempTitle = createNeuesElement(
-        "span",
-        "title-" + projektKeys[i],
-        "li-title"
-    );
-    indexrows[i].appendChild(tempTitle);
+  let tempTitle = createNeuesElement(
+    "span",
+    "title-" + projektKeys[i],
+    "li-title"
+  );
+  indexrows[i].appendChild(tempTitle);
 
-    tempTitle.innerHTML = projectValues[i].title;
+  tempTitle.innerHTML = projectValues[i].title;
 
-    let tempCat = createNeuesElement(
-        "span",
-        "category-" + projektKeys[i],
-        "li-category"
-    );
-    indexrows[i].appendChild(tempCat);
+  let tempCat = createNeuesElement(
+    "span",
+    "category-" + projektKeys[i],
+    "li-category"
+  );
+  indexrows[i].appendChild(tempCat);
 
-    tempCat.innerHTML = projectValues[i].category;
+  tempCat.innerHTML = projectValues[i].category;
 
-    let tempYear = createNeuesElement(
-        "span",
-        "year-" + projektKeys[i],
-        "li-year"
-    );
-    indexrows[i].appendChild(tempYear);
+  let tempYear = createNeuesElement(
+    "span",
+    "year-" + projektKeys[i],
+    "li-year"
+  );
+  indexrows[i].appendChild(tempYear);
 
-    tempYear.innerHTML = projectValues[i].year;
+  tempYear.innerHTML = projectValues[i].year;
 
-    let r = Math.floor(Math.random() * 100)
-    indexrows[i].querySelector(".li-category").style.paddingLeft = r + "vw";
-
+  let r = Math.floor(Math.random() * 100);
+  indexrows[i].querySelector(".li-category").style.paddingLeft = r + "vw";
 }
+
+let tempStr = table.innerHTML;
+tempStr =
+  tempStr +
+  '<li id="index-info" class="index-row"><span id="title-phd" class="li-title">Info</span><span id="year-phd" class="li-year">mail@julikahother.de</span></li>';
+table.innerHTML = tempStr;
 
 // +++++++ Durchscrollen ++++++
 let counter = 0;
 let indexAktiv = false;
-let cb = 20
+let cb = 20;
 for (i = 0; i < projektKeys.length; i++) {
-    projBubbleElements[i].style.filter = "blur(" + cb + "px)";
+  projBubbleElements[i].style.filter = "blur(" + cb + "px)";
 }
 let projektcounter = 0;
 let einzelblur = 0;
+let speed = 6;
+let blurfaktor = 5;
+var lastScroll = 0;
+let dir;
 
 document.addEventListener("wheel", (e) => {
-
+  if (Date.now() - lastScroll > 50) {
     if (e.deltaY > 0) {
-        scrolldown = true;
-        counter++;
-
+      scrolldown = true;
+      counter++;
     } else {
-        scrolldown = false;
-        counter--;
+      scrolldown = false;
+      counter--;
     }
-
 
     //++++++++  INDEX  +++++++++
     if (scrolldown && cb >= -30 && projektcounter == 0) {
-        cb = cb - 5;
+      cb = cb - 5;
     } else if (!scrolldown && cb <= 30 && projektcounter == 0) {
-        cb = cb + 5;
+      cb = cb + 5;
     }
 
     if (cb > -30) {
-        indexAktiv = true;
-        projekteAktiv = false;
-        if (cb > 0) {
-            changetitle("Index")
-        }
-        if (cb < 0 && projekte[current]) {
-            changetitle(projekte[current].title)
-        }
+      indexAktiv = true;
+      projekteAktiv = false;
+      if (cb > 0) {
+        changetitle("Index");
+      }
+      if (cb < 0 && projekte[current]) {
+        changetitle(projekte[current].title);
+      }
     } else {
-        indexAktiv = false;
-        projekteAktv = true
-
+      indexAktiv = false;
+      projekteAktv = true;
     }
     if (cb <= 30) {
-        table.style.display = "none";
+      table.style.display = "none";
     } else if (cb >= 30) {
-        table.style.display = "grid";
+      table.style.display = "grid";
     }
     for (i = 0; i < projektKeys.length; i++) {
-        projBubbleElements[i].style.filter = "blur(" + (cb - 5) + "px)";
+      projBubbleElements[i].style.filter = "blur(" + (cb - 5) + "px)";
     }
 
     //++++++++  POJIS  +++++++++
-    removeBlur()
-    stapelSchliessen()
+    removeBlur();
+    stapelSchliessen();
 
-
-    if (counter % 6 == 0) {
-        if (!indexAktiv) {
-            nextProject()
-
-        }
-    } else {
+    if (!indexAktiv) {
+      if (counter % 6 == 0) {
+        nextProject();
+      } else {
         if (scrolldown) {
-            einzelblur++
+          einzelblur++;
         } else {
-            einzelblur--
+          einzelblur--;
         }
+      }
 
-        projBubbleElements[projektcounter].style.filter = "blur(" + (einzelblur * 2 - 4) + "px)";
-
+      projBubbleElements[projektcounter].style.filter =
+        "blur(" + Math.max(0, einzelblur * blurfaktor) + "px)";
+    //   if (dir > 0.5 && ![4,5,6].includes(projektcounter)) {
+    //     projBubbleElements[projektcounter].style.transform =
+    //       "translateX(" + Math.min(0,-einzelblur * blurfaktor) + "px)";
+    //   } else if(![4,5,6].includes(projektcounter)){
+    //     projBubbleElements[projektcounter].style.transform =
+    //     "translateX(" + Math.max(0,einzelblur * blurfaktor) + "px)";    
+    //   }
     }
 
-})
-
-
-
+    lastScroll = Date.now();
+    console.log(projektcounter);
+  }
+});
 
 function nextProject() {
-    if (scrolldown) {
-        oberstesEntfernen()
-        if (projektcounter != projBubbleElements.lenth - 1 && projektcounter < projBubbleElements.length) {
-            projektcounter++
-        }
-        einzelblur = 0;
-
-    } else if (!scrolldown) {
-        if (projektcounter != 0 && projektcounter <= projBubbleElements.length) {
-            projektcounter--
-        }
-        neuesAnzeigen()
-        einzelblur = 6;
-
+  if (scrolldown) {
+    oberstesEntfernen();
+    if (projektcounter < projBubbleElements.length - 2) {
+      projektcounter++;
     }
-    current = projBubbleElements[projektcounter].id;
+    einzelblur = -1;
+    dir = Math.random();
+  } else if (!scrolldown) {
+    if (projektcounter > 0) {
+      projektcounter--;
+    }
+    neuesAnzeigen();
+    einzelblur = 5;
+    dir = Math.random();
+  }
+  current = projBubbleElements[projektcounter].id;
+  changetitle(projekte[current].title);
 
-    changetitle(projekte[current].title)
+  
 }
 
 function oberstesEntfernen() {
-    for (let i = 0; i < projBubbleElements.length; i++) {
-        const element = projBubbleElements[i];
+  for (let i = 0; i < projBubbleElements.length; i++) {
+    const element = projBubbleElements[i];
 
-        if (projektcounter == i) {
-            element.classList.add("hide")
-        }
+    if (projektcounter == i) {
+      element.classList.add("hide");
     }
+  }
 }
 
 function neuesAnzeigen() {
-    for (let i = 0; i < projBubbleElements.length; i++) {
-        const element = projBubbleElements[i];
+  for (let i = 0; i < projBubbleElements.length; i++) {
+    const element = projBubbleElements[i];
 
-        if (projektcounter == i) {
-            element.classList.remove("hide")
-        }
+    if (projektcounter == i) {
+      element.classList.remove("hide");
     }
+  }
 }
-
-
 
 // ++++++++ Stapel öffnen ++++++++
 
 container.addEventListener("click", (e) => {
+  addBlur();
 
-    addBlur();
+  if (n == 0 && projekteAktv && projekte[current].images[0]) {
+    pTitle.innerHTML = pfeil + pTitle.textContent;
+    nextImage(e);
 
-    if (n == 0 && projekteAktv && projekte[current].images[0]) {
-        pTitle.innerHTML = pfeil + pTitle.textContent;
-        nextImage(e);
-
-        stapelContainer.style.display = "block";
-    }
+    stapelContainer.style.display = "block";
+  }
 });
 
 // +++ weitere Bilder anzeigen ++++++
 
 stapelContainer.addEventListener("click", (e) => {
-    if (n < projekte[current].images.length) {
-        nextImage(e);
-    }
+  if (n < projekte[current].images.length) {
+    nextImage(e);
+  }
 });
 
 function nextImage(e) {
-    imagesStapel[n] = createNeuesElement("img", current + n, "stapelBild");
+  imagesStapel[n] = createNeuesElement("img", current + n, "stapelBild");
 
-    imagesStapel[n].src =
-        "assets/images/" + current + "/" + projekte[current].images[n];
-    imagesStapel[n].style.transform =
-        "rotate(" + getRandomWinkel() + ") translateY(-50%) translateX(-50%)";
-    if (e.x < 250) {
-        imagesStapel[n].style.left = 280;
-    } else if (e.x > windowWidth - 250) {
-        imagesStapel[n].style.left = windowWidth - 280;
-    } else {
-        imagesStapel[n].style.left = e.x;
-    }
-    if (e.y < 300) {
-        imagesStapel[n].style.top = 330;
-    } else if (e.y > windowHeight - 250) {
-        imagesStapel[n].style.top = windowHeight - 280;
-    } else {
-        imagesStapel[n].style.top = e.y;
-    }
+  imagesStapel[n].src =
+    "assets/images/" + current + "/" + projekte[current].images[n];
+  imagesStapel[n].style.transform =
+    "rotate(" + getRandomWinkel() + ") translateY(-50%) translateX(-50%)";
+  if (e.x < 250) {
+    imagesStapel[n].style.left = 280;
+  } else if (e.x > windowWidth - 250) {
+    imagesStapel[n].style.left = windowWidth - 280;
+  } else {
+    imagesStapel[n].style.left = e.x;
+  }
+  if (e.y < 300) {
+    imagesStapel[n].style.top = 330;
+  } else if (e.y > windowHeight - 250) {
+    imagesStapel[n].style.top = windowHeight - 280;
+  } else {
+    imagesStapel[n].style.top = e.y;
+  }
 
-    stapelContainer.appendChild(imagesStapel[n]);
+  stapelContainer.appendChild(imagesStapel[n]);
 
-    n++;
+  n++;
 }
 
-
-
 closeButton.addEventListener("click", (e) => {
-    stapelSchliessen()
-
+  stapelSchliessen();
 });
 
 // ++++ About Seite und Header +++++++
@@ -307,84 +312,82 @@ closeButton.addEventListener("click", (e) => {
 
 // ++++++ Helferfunktionen ++++++
 
+function isLastProj() {
+  if (projektcounter == projBubbleElements.length - 2) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 function getRandomWinkel() {
-    let maxWinkel = 10;
-    let rWinkel = Math.floor(
-        Math.random() * Math.floor(maxWinkel * 2) - maxWinkel
-    );
-    return rWinkel + "deg";
+  let maxWinkel = 10;
+  let rWinkel = Math.floor(
+    Math.random() * Math.floor(maxWinkel * 2) - maxWinkel
+  );
+  return rWinkel + "deg";
 }
 
 function createNeuesElement(type, id, klasse) {
-    let elem = document.createElement(type);
-    elem.setAttribute("id", id);
-    elem.setAttribute("class", klasse);
-    return elem;
+  let elem = document.createElement(type);
+  elem.setAttribute("id", id);
+  elem.setAttribute("class", klasse);
+  return elem;
 }
 
 function checkScrollDirectionIsUp(event) {
-    if (event.wheelDelta) {
-        return event.wheelDelta > 0;
-    }
-    return event.deltaY < 0;
+  if (event.wheelDelta) {
+    return event.wheelDelta > 0;
+  }
+  return event.deltaY < 0;
 }
 
 function durchrotieren(arr) {
-    if (scrolldown) {
-        arr.unshift(arr[arr.length - 1]);
-        arr.pop();
-    } else {
-        arr.push(arr[0]);
-        arr.shift();
-    }
+  if (scrolldown) {
+    arr.unshift(arr[arr.length - 1]);
+    arr.pop();
+  } else {
+    arr.push(arr[0]);
+    arr.shift();
+  }
 }
 
 function stapelSchliessen() {
-
-    pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
-    for (i = 0; i < imagesStapel.length; i++) {
-        imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
-    }
-    stapelContainer.style.display = "none";
-    imagesStapel = [];
-    n = 0;
-
-
+  pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
+  for (i = 0; i < imagesStapel.length; i++) {
+    imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
+  }
+  stapelContainer.style.display = "none";
+  imagesStapel = [];
+  n = 0;
 }
 
 function changetitle(input) {
-    pTitle.textContent = input
+  pTitle.textContent = input;
 }
 
-
-
-
 function addBlur() {
-
-    let addAnimation = setInterval(() => {
-        console.log(blurriness);
-
-        if (blurriness < 20) {
-            blurriness += 4
-            for (i = 0; i < projektKeys.length; i++) {
-                projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
-            }
-        } else {
-            clearInterval(addAnimation)
-        }
-    }, 20)
+  let addAnimation = setInterval(() => {
+    if (blurriness < 20) {
+      blurriness += 4;
+      for (i = 0; i < projektKeys.length; i++) {
+        projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
+      }
+    } else {
+      clearInterval(addAnimation);
+    }
+  }, 20);
 }
 
 function removeBlur() {
-    let removeAnimation = setInterval(() => {
-        if (blurriness > 0) {
-            blurriness -= 4
-            for (i = 0; i < projektKeys.length; i++) {
-                projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
-            }
-        } else {
-            clearInterval(removeAnimation)
-
-        }
-    }, 20)
+  let removeAnimation = setInterval(() => {
+    if (blurriness > 0) {
+      blurriness -= 4;
+      for (i = 0; i < projektKeys.length; i++) {
+        projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
+      }
+    } else {
+      clearInterval(removeAnimation);
+    }
+  }, 20);
 }
