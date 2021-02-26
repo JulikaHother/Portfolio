@@ -15,6 +15,7 @@ let imagesStapel = [];
 let currentProj = projBubbleElements[0];
 let currentValue;
 let table = document.querySelector(".index");
+let infos = document.querySelector("#infos");
 let blurriness = 0;
 
 let n = 0;
@@ -33,8 +34,9 @@ let pfeil = "↓ &nbsp;&nbsp;&nbsp;";
 let projektcounter = 0;
 let counter = 0;
 let indexAktiv = false;
+let infosAktiv = false;
 let stapelOffen = false;
-let cb = 20;
+let infosblur = 10;
 let einzelblur = 0;
 let blurfaktor = 10;
 var lastScroll = 0;
@@ -99,21 +101,32 @@ tempStr =
   '<li id="index-info" class="index-row"><span id="title-phd" class="li-title">Info</span><span id="year-phd" class="li-year">mail@julikahother.de</span></li>';
 table.innerHTML = tempStr;
 
+infos.style.filter = "blur(" + infosblur + "px)";
+
 // ++++ Durchjumpen ++++++
 
 table.addEventListener("click", (e) => {
-  let target = Array.from(e.path)
+  let path = e.composedPath();
+  let target = Array.from(path)
     .find((element) => element.classList.contains("index-row"))
     .id.replaceAll("index-", "");
 
-  for (const i in projektTitles) {
-    if (projektTitles[i] == target) {
-      projektcounter = i;
-      changetitle(projekte[target].title);
-      updateProjVisibility(projektcounter);
-      removeIndex();
+  console.log(target);
+
+  if (target == "info") {
+    projektcounter = projektTitles.length;
+    showInfos();
+    changetitle("Infos");
+  } else {
+    for (const i in projektTitles) {
+      if (projektTitles[i] == target) {
+        projektcounter = i;
+      }
     }
+    changetitle(projekte[target].title);
   }
+  removeIndex();
+  updateProjVisibility(projektcounter);
 });
 
 // +++++++ Durchscrollen ++++++
@@ -144,31 +157,25 @@ document.addEventListener("wheel", (e) => {
       } else {
         einzelblur--;
       }
-      if (projektcounter >= 0) {
+      if (projektcounter >= 0 && !isInfos()) {
         projBubbleElements[projektcounter].style.filter =
           "blur(" + Math.max(0, einzelblur * blurfaktor) + "px)";
       }
     }
 
     if (!indexAktiv && stapelOffen) {
-      removeBlur();
       stapelSchliessen();
+      removeBlur();
     }
 
-    //++++++++  INDEX  +++++++++
-
-    // if (counter < 0 && !indexAktiv && !scrolldown) {
-    //   showIndex();
-    // } else if (counter < 0 && indexAktiv && scrolldown) {
-    //   removeIndex();
-    // }
+    console.log(projektcounter);
     lastScroll = Date.now();
   }
 });
 
 function nextProject() {
   if (scrolldown) {
-    if (!isLastProj()) projektcounter++;
+    if (!isInfos()) projektcounter++;
     einzelblur = -2;
   } else if (!scrolldown) {
     if (projektcounter >= 0) projektcounter--;
@@ -177,7 +184,11 @@ function nextProject() {
 
   if (projektcounter == -1) {
     showIndex();
+  } else if (isInfos()) {
+    showInfos();
+    updateProjVisibility(projektcounter);
   } else {
+    removeInfos();
     removeIndex();
     updateProjVisibility(projektcounter);
   }
@@ -214,7 +225,7 @@ function updateProjVisibility(projektcounter) {
       ? element.classList.remove("hide")
       : element.classList.add("hide");
   }
-  changetitle(projekte[getCurrentId()].title);
+  if (!isInfos()) changetitle(projekte[getCurrentId()].title);
 }
 
 function stapelSchliessen() {
@@ -273,8 +284,8 @@ function nextImage(e) {
   n++;
 }
 
-function isLastProj() {
-  if (projektcounter == projBubbleElements.length - 1) {
+function isInfos() {
+  if (projektcounter == projBubbleElements.length) {
     return true;
   } else {
     return false;
@@ -327,7 +338,7 @@ function changetitle(input) {
 function addBlur(callback, x) {
   let addAnimation = setInterval(() => {
     if (blurriness < 20) {
-      blurriness += 4;
+      blurriness += 2;
       for (i = 0; i < projektTitles.length; i++) {
         projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
       }
@@ -335,20 +346,20 @@ function addBlur(callback, x) {
       clearInterval(addAnimation);
       callback(x);
     }
-  }, 20);
+  }, 10);
 }
 
 function removeBlur() {
   let removeAnimation = setInterval(() => {
     if (blurriness > 0) {
-      blurriness -= 4;
+      blurriness -= 2;
       for (i = 0; i < projektTitles.length; i++) {
         projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
       }
     } else {
       clearInterval(removeAnimation);
     }
-  }, 20);
+  }, 10);
 }
 
 function showIndex() {
@@ -368,5 +379,35 @@ function removeIndex() {
 }
 
 function getCurrentId() {
-  return projBubbleElements[projektcounter].id;
+  let proj = projBubbleElements[projektcounter];
+  if (typeof proj != "undefined") return proj.id;
+}
+
+function showInfos() {
+  if (infosAktiv) return;
+  let removeAnimation = setInterval(() => {
+    if (infosblur > 0) {
+      infosblur -= 1;
+      infos.style.filter = "blur(" + infosblur + "px)";
+    } else {
+      clearInterval(removeAnimation);
+      changetitle("Infos");
+    }
+  }, 30);
+  infosAktiv = !infosAktiv;
+
+}
+function removeInfos() {
+  if (!infosAktiv) return;
+  let removeAnimation = setInterval(() => {
+    if (infosblur < 10) {
+      infosblur += 1;
+      infos.style.filter = "blur(" + infosblur + "px)";
+    } else {
+      clearInterval(removeAnimation);
+      changetitle("Infos");
+    }
+  }, 20);
+  infosAktiv = !infosAktiv;
+
 }
