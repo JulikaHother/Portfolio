@@ -126,7 +126,14 @@ body {
     text-shadow: -0.5px 0 white, 0 0.5px white, 0.5px 0 white, 0 -1px white;
     align-items: center;
     grid-template-columns: auto auto auto;
+    cursor: pointer;
 }
+
+.index li:hover {
+    text-shadow: 0px 0px 5px white;
+
+}
+
 
 .index li span {
     display: inline-block;
@@ -146,9 +153,11 @@ body {
         grid-template-rows: auto auto;
         grid-template-columns: 100%;
     }
+
     .index li span {
         text-align: left;
     }
+
     .li-year {
         display: none !important;
     }
@@ -247,8 +256,9 @@ body {
     left: 0vw;
 }
 
-#traum svg{
-    height: 100%;;
+#traum svg {
+    height: 100%;
+    ;
 }
 
 #brennes {
@@ -322,7 +332,10 @@ body {
   max-width: 70vw;
   height: 70%;
   top: 50%; */
-    width: 500px;
+    max-height: 50vh;
+
+    max-width: 50vw;
+    /* width: 500px; */
     position: absolute;
     /* width: 80vw; */
     display: block;
@@ -330,7 +343,7 @@ body {
     transform-origin: top left;
 }
 
-.Stapeltext {   
+.Stapeltext {
     mix-blend-mode: exclusion;
     font-size: 2em;
     text-align: left;
@@ -349,7 +362,7 @@ body {
     color: white;
 }
 
-#index-info{
+#index-info {
     color: rgb(180, 192, 231);
     text-shadow: -0.5px 0 rgb(180, 192, 231), 0 0.5px rgb(180, 192, 231), 0.5px 0 rgb(180, 192, 231), 0 -1px rgb(180, 192, 231);
 }
