@@ -1,31 +1,26 @@
 @font-face {
     font-family: 'Monument';
-    src: url('assets/fonts/ABCMonumentGrotesk-Medium.woff2') format('woff2'),
-        url('assets/fonts/ABCMonumentGrotesk-Medium.woff') format('woff');
+    src: url('assets/fonts/ABCMonumentGrotesk-Medium.woff2') format('woff2'), url('assets/fonts/ABCMonumentGrotesk-Medium.woff') format('woff');
     font-weight: 600;
     font-style: italic;
     font-display: swap;
 }
 
-
 * {
     margin: 0;
     padding: 0;
     cursor: pointer !important;
-
 }
 
 ::selection {
     background-color: none;
     color: transparent;
     text-shadow: 0px 0px 10px blue;
-
 }
 
 ::-moz-selection {
     background-color: none;
     text-shadow: 0px 0px 10px blue;
-
     color: transparent;
     ;
 }
@@ -34,16 +29,12 @@ body {
     font-family: "Monument", Arial, Helvetica, sans-serif;
     font-weight: 600;
     background-color: #eae2fa;
-    background-image: url("assets/images/infos.jpg");
-    background-size: contain;
-    background-position: 0px 50px;
     font-size: 150%;
     color: black;
     background-repeat: no-repeat;
     height: 100%;
     overflow: hidden;
     cursor: pointer !important;
-
 }
 
 .fixed-container {
@@ -67,7 +58,6 @@ body {
     /* text-shadow: -0.5px 0 red, 0 0.5px red, 0.5px 0 red, 0 -1px red; */
     text-transform: uppercase;
     text-shadow: 0px 0px 3px red;
-
 }
 
 .name {
@@ -139,7 +129,6 @@ body {
     border-bottom: 2px solid white;
     /* text-shadow: -0.5px 0 white, 0 0.5px white, 0.5px 0 white, 0 -1px white; */
     text-shadow: 0px 0px 5px white;
-
     align-items: center;
     grid-template-columns: auto auto auto;
     cursor: pointer;
@@ -148,7 +137,6 @@ body {
 #index-info {
     color: blue;
     text-shadow: 0px 0px 5px blue;
-
     /* text-shadow: -0.5px 0 rgb(180, 192, 231), 0 0.5px rgb(180, 192, 231), 0.5px 0 rgb(180, 192, 231), 0 -1px rgb(180, 192, 231); */
 }
 
@@ -177,18 +165,24 @@ body {
     text-align: right;
 }
 
+#isMobile {
+    position: absolute;
+    display: none;
+}
+
 @media (max-width: 768px) {
     .index li {
         grid-template-rows: auto auto;
         grid-template-columns: 100%;
     }
-
     .index li span {
         text-align: left;
     }
-
     .li-year {
         display: none !important;
+    }
+    #isMobile {
+        display: block;
     }
 }
 
@@ -226,7 +220,6 @@ body {
     height: 40vh;
     top: 0;
     right: 10vw;
-
 }
 
 #samt {
@@ -403,14 +396,12 @@ body {
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr auto;
-
 }
 
 #infos a {
     text-decoration: none;
     color: transparent;
     text-shadow: 0px 0px 5px blue;
-
 }
 
 #infos a:hover {
@@ -429,7 +420,6 @@ body {
     line-height: 1.2em;
 }
 
-
 .indent {
     margin-left: 30px;
 }
@@ -439,15 +429,13 @@ body {
     color: transparent;
     text-shadow: 0px 0px 3px blue;
     grid-column: 1/3;
-
 }
 
 @media (max-width: 990px) {
     #infos {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr  auto;
+        grid-template-rows: 1fr auto;
     }
-
     .col1 {
         font-size: 1.3em;
         padding-right: 20px;
@@ -458,22 +446,21 @@ body {
     }
     .foot {
         grid-column: 1/1;
-    
     }
-    
 }
+
 #impressum-button {
     cursor: pointer !important;
 }
 
 #impressum-button:hover+#impressum-text {
     display: inline-block;
-
 }
 
 #impressum-text {
     display: none;
 }
+
 
 /* 
 .yearindent{

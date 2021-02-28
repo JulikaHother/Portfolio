@@ -67,7 +67,7 @@ let projekte = {
         "year": "2020",
         "background": "traum.png",
         "images": [],
-        "url": "1"
+        "url": "julikahother.de/traum"
     },
     "holzschnitt": {
         "title": "Holzschnitt",
