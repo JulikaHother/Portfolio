@@ -9,7 +9,8 @@ let indexrows = [];
 let stapelContainer = document.querySelector("#stapelcontainer");
 let container = document.querySelector(".fixed-container");
 let headlineBG = document.querySelector(".headline");
-let closeButton = document.querySelector("#closeButton");
+let extLinkArrow = document.querySelector("#ext-link");
+let urlElem = document.querySelector("#ext-url");
 let title = document.querySelector(".name");
 let imagesStapel = [];
 let currentProj = projBubbleElements[0];
@@ -111,8 +112,6 @@ table.addEventListener("click", (e) => {
     .find((element) => element.classList.contains("index-row"))
     .id.replaceAll("index-", "");
 
-  console.log(target);
-
   if (target == "info") {
     projektcounter = projektTitles.length;
     showInfos();
@@ -137,7 +136,6 @@ table.addEventListener("click", (e) => {
 let indexcounter = 0;
 document.addEventListener("wheel", (e) => {
   if (Date.now() - lastScroll > 40) {
-    console.log(indexAktiv);
     if (e.deltaY > 0) {
       scrolldown = true;
       counter++;
@@ -167,7 +165,6 @@ document.addEventListener("wheel", (e) => {
       stapelSchliessen();
     }
 
-    console.log(projektcounter);
     lastScroll = Date.now();
   }
 });
@@ -211,19 +208,19 @@ stapelContainer.addEventListener("click", (e) => {
   }
 });
 
-headBalken.addEventListener("click", (e) => {
+title.addEventListener("click", (e) => {
   if (stapelOffen) {
     stapelSchliessen();
   } else if (title.textContent == "Index") {
     showIndex();
   }
 });
-headBalken.addEventListener("mouseover", (e) => {
+title.addEventListener("mouseover", (e) => {
   if (!stapelOffen) {
     title.textContent = "Index";
   }
 });
-headBalken.addEventListener("mouseout", (e) => {
+title.addEventListener("mouseout", (e) => {
   if (!stapelOffen) {
     title.textContent = "Julika Hother";
   }
@@ -347,8 +344,17 @@ function durchrotieren(arr) {
   }
 }
 
+
 function changetitle(input) {
   pTitle.textContent = input;
+  extLinkArrow.style.display = "none";
+
+  if (typeof projectValues[projektcounter] != "undefined") {
+    if (typeof projectValues[projektcounter].url != "undefined") {
+      extLinkArrow.style.display = "inline-block";
+      urlElem.href = projectValues[projektcounter].url;
+    }
+  }
 }
 
 function addBlur(callback, x) {

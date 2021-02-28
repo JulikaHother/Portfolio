@@ -15,6 +15,21 @@
 
 }
 
+::selection {
+    background-color: none;
+    color: transparent;
+    text-shadow: 0px 0px 10px blue;
+
+}
+
+::-moz-selection {
+    background-color: none;
+    text-shadow: 0px 0px 10px blue;
+
+    color: transparent;
+    ;
+}
+
 body {
     font-family: "Monument", Arial, Helvetica, sans-serif;
     font-weight: 600;
@@ -70,11 +85,12 @@ body {
     padding: 10px 20px;
 }
 
-#closeButton {
+#ext-link {
     display: none;
     padding: 0;
     cursor: pointer;
     z-index: 250;
+    transform: translateY(-2px);
 }
 
 #about {
@@ -377,11 +393,6 @@ body {
     mix-blend-mode: difference;
 }
 
-::selection {
-    background-color: none;
-    color: white;
-}
-
 #infos {
     position: absolute;
     color: blue;
@@ -452,7 +463,7 @@ body {
     
 }
 #impressum-button {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 #impressum-button:hover+#impressum-text {
