@@ -22,7 +22,6 @@ body {
     background-repeat: no-repeat;
     height: 100%;
     overflow: hidden;
-
 }
 
 .form {
@@ -46,7 +45,7 @@ body {
     width: 100vw;
 }
 
-#head-balken{
+#head-balken {
     display: inline-block;
     position: absolute;
     width: 100%;
@@ -128,22 +127,22 @@ body {
     grid-template-columns: auto auto auto;
     cursor: pointer;
 }
+
 #index-info {
     color: rgb(180, 192, 231);
     text-shadow: -0.5px 0 rgb(180, 192, 231), 0 0.5px rgb(180, 192, 231), 0.5px 0 rgb(180, 192, 231), 0 -1px rgb(180, 192, 231);
 }
 
-
-.index li:hover{
+.index li:hover {
     text-shadow: 0px 0px 5px white;
     color: transparent;
-    background-color: rgba(255, 255, 255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 #index-info:hover {
     text-shadow: 0px 0px 5px rgb(180, 192, 231);
     color: transparent;
-    background-color: rgba(255, 255, 255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .index li span {
@@ -164,11 +163,9 @@ body {
         grid-template-rows: auto auto;
         grid-template-columns: 100%;
     }
-
     .index li span {
         text-align: left;
     }
-
     .li-year {
         display: none !important;
     }
@@ -345,7 +342,6 @@ body {
   height: 70%;
   top: 50%; */
     max-height: 50vh;
-
     max-width: 50vw;
     /* width: 500px; */
     position: absolute;
@@ -374,19 +370,16 @@ body {
     color: white;
 }
 
-
 #infos {
     position: absolute;
     color: blue;
     text-shadow: -0.5px 0 blue, 0 0.5px blue, 0.5px 0 blue, 0 -1px blue;
-
-    bottom: 50px;
+    top: 50px;
     padding: 20px;
     filter: blur(10px);
-    width: 70vw;
-
+    width: 40vw;
 }
 
 #infos p {
-    width: 60vw;
+    width: 40vw;
 }

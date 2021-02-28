@@ -5,7 +5,9 @@ let projekte = {
         "year": "2020",
         "category": "Editoral Design",
         "background": "christine.png",
-        "images": []
+        "images": [
+            "christine1.png"
+        ]
     },
     "phd": {
         "title": "From the root of Variation",
@@ -15,6 +17,14 @@ let projekte = {
         "background": "phd.png",
         "images": [
             "phd0.png",
+            "phd1.png",
+            "phd2.png",
+            "phd3.png",
+            "phd4.png",
+            "phd5.png",
+            "phd6.png",
+            "phd7.png",
+            "phd8.png"
         ]
     },
     "nakefews": {
@@ -36,7 +46,8 @@ let projekte = {
         "year": "2020",
         "background": "siebdruck.png",
         "images": [
-            "siebdruck0.jpg",
+            "siebdruck0.png",
+            "siebdruck1.png"
         ]
     },
     "traum": {
@@ -58,8 +69,7 @@ let projekte = {
             "holzschnitt1.jpg",
             "holzschnitt2.jpg",
             "holzschnitt3.jpg",
-            "holzschnitt4.jpg",
-            "holzschnitt5.jpg"
+            "holzschnitt4.jpg"
         ]
     },
     "samt": {
@@ -92,17 +102,14 @@ let projekte = {
         "year": "2019",
         "background": "samtetc.png",
         "images": [
-            "samtetc0.jpg",
-            "samtetc1.jpg",
-            "samtetc2.jpg",
-            "samtetc3.jpg",
-            "samtetc4.jpg",
-            "samtetc5.jpg",
-            "samtetc6.jpg",
-            "samtetc7.jpg",
-            "samtetc8.jpg",
-            "samtetc9.jpg",
-            "samtetc10.jpg"
+            "samtetc1.png",
+            "samtetc2.png",
+            "samtetc3.png",
+            "samtetc4.png",
+            "samtetc5.png",
+            "samtetc6.png",
+            "samtetc7.png",
+            "samtetc8.png"
         ]
     },
     "museum": {
@@ -111,7 +118,15 @@ let projekte = {
         "category": "3D Experiments",
         "year": "2019",
         "background": "museum.png",
-        "images": []
+        "images": [
+            "museum0.png",
+            "museum1.jpg",
+            "museum2.jpg",
+            "museum3.jpg",
+            "museum4.jpg",
+            "museum5.jpg",
+            "museum6.jpg"
+        ]
     },
     "wildwildweb": {
         "title": "wild wild web ",
@@ -136,16 +151,14 @@ let projekte = {
         "background": "tamuz.png",
         "images": [
             "tamuz0.png",
-            "tamuz1.png",
+            "tamuz1.gif",
             "tamuz2.png",
-            "tamuz3.jpg",
-            "tamuz4.png",
+            "tamuz3.png",
             "tamuz5.png",
             "tamuz6.png",
             "tamuz7.png",
             "tamuz8.png",
-            "tamuz9.png",
-            "tamuz10.gif"
+            "tamuz9.png"
         ]
     },
     "Riso": {
@@ -195,6 +208,27 @@ let projekte = {
         "category": "Magazine",
         "year": "2018",
         "background": "nichtjetzt.png",
-        "images": []
+        "images": [
+            "nichtjetzt0.png",
+            "nichtjetzt1.png",
+            "nichtjetzt2.png",
+            "nichtjetzt3.png",
+            "nichtjetzt4.png",
+            "nichtjetzt5.png",
+            "nichtjetzt6.png",
+            "nichtjetzt7.png",
+            "nichtjetzt8.png",
+            "nichtjetzt9.png",
+            "nichtjetzt10.png",
+            "nichtjetzt11.png",
+            "nichtjetzt12.png",
+            "nichtjetzt13.png",
+            "nichtjetzt14.png",
+            "nichtjetzt15.png",
+            "nichtjetzt16.png",
+            "nichtjetzt17.png",
+            "nichtjetzt18.png",
+            "nichtjetzt19.png"
+        ]
     }
 }
