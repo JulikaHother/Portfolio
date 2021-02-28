@@ -1,4 +1,14 @@
 let projekte = {
+    "liquid": {
+        "title": "Liquid Body",
+        "description": "",
+        "year": "2021",
+        "category": "3D Enviroment",
+        "background": "liquid.png",
+        "images": [
+            "christine1.png"
+        ]
+    },
     "christine": {
         "title": "Körper, Raum, Kleidung",
         "description": "",
@@ -56,7 +66,8 @@ let projekte = {
         "category": "experimental Website",
         "year": "2020",
         "background": "traum.png",
-        "images": []
+        "images": [],
+        "url": "1"
     },
     "holzschnitt": {
         "title": "Holzschnitt",
@@ -126,7 +137,8 @@ let projekte = {
             "museum4.jpg",
             "museum5.jpg",
             "museum6.jpg"
-        ]
+        ],
+        "url": "1"
     },
     "wildwildweb": {
         "title": "wild wild web ",
@@ -140,7 +152,8 @@ let projekte = {
             "www2.jpg",
             "www3.jpg",
             "www4.jpg",
-        ]
+        ],
+        "url": "https://howww.de/web/julikahother/"
     },
 
     "tamuz": {

@@ -9,7 +9,8 @@ let indexrows = [];
 let stapelContainer = document.querySelector("#stapelcontainer");
 let container = document.querySelector(".fixed-container");
 let headlineBG = document.querySelector(".headline");
-let closeButton = document.querySelector("#closeButton");
+let extLinkArrow = document.querySelector("#ext-link");
+let urlElem = document.querySelector("#ext-url");
 let title = document.querySelector(".name");
 let imagesStapel = [];
 let currentProj = projBubbleElements[0];
@@ -36,7 +37,7 @@ let counter = 0;
 let indexAktiv = false;
 let infosAktiv = false;
 let stapelOffen = false;
-let infosblur = 10;
+let infosblur = 20;
 let einzelblur = 0;
 let blurfaktor = 10;
 var lastScroll = 0;
@@ -111,8 +112,6 @@ table.addEventListener("click", (e) => {
     .find((element) => element.classList.contains("index-row"))
     .id.replaceAll("index-", "");
 
-  console.log(target);
-
   if (target == "info") {
     projektcounter = projektTitles.length;
     showInfos();
@@ -137,7 +136,6 @@ table.addEventListener("click", (e) => {
 let indexcounter = 0;
 document.addEventListener("wheel", (e) => {
   if (Date.now() - lastScroll > 40) {
-    console.log(indexAktiv);
     if (e.deltaY > 0) {
       scrolldown = true;
       counter++;
@@ -165,10 +163,8 @@ document.addEventListener("wheel", (e) => {
 
     if (!indexAktiv && stapelOffen) {
       stapelSchliessen();
-      removeBlur();
     }
 
-    console.log(projektcounter);
     lastScroll = Date.now();
   }
 });
@@ -212,8 +208,22 @@ stapelContainer.addEventListener("click", (e) => {
   }
 });
 
-closeButton.addEventListener("click", (e) => {
-  stapelSchliessen();
+title.addEventListener("click", (e) => {
+  if (stapelOffen) {
+    stapelSchliessen();
+  } else if (title.textContent == "Index") {
+    showIndex();
+  }
+});
+title.addEventListener("mouseover", (e) => {
+  if (!stapelOffen) {
+    title.textContent = "Index";
+  }
+});
+title.addEventListener("mouseout", (e) => {
+  if (!stapelOffen) {
+    title.textContent = "Julika Hother";
+  }
 });
 
 // ++++++ Helferfunktionen ++++++
@@ -229,11 +239,13 @@ function updateProjVisibility(projektcounter) {
 }
 
 function stapelSchliessen() {
+  removeBlur();
   pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
   for (i = 0; i < imagesStapel.length; i++) {
     imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
   }
   stapelContainer.style.display = "none";
+  title.textContent = "Julika Hother";
   imagesStapel = [];
   n = 0;
   stapelOffen = false;
@@ -246,6 +258,7 @@ function stapeloeffnen(e) {
 
     stapelContainer.style.display = "block";
   }
+  title.textContent = "✕";
   stapelOffen = true;
 }
 
@@ -331,8 +344,17 @@ function durchrotieren(arr) {
   }
 }
 
+
 function changetitle(input) {
   pTitle.textContent = input;
+  extLinkArrow.style.display = "none";
+
+  if (typeof projectValues[projektcounter] != "undefined") {
+    if (typeof projectValues[projektcounter].url != "undefined") {
+      extLinkArrow.style.display = "inline-block";
+      urlElem.href = projectValues[projektcounter].url;
+    }
+  }
 }
 
 function addBlur(callback, x) {
@@ -364,10 +386,17 @@ function removeBlur() {
 
 function showIndex() {
   if (indexAktiv) return;
+
   addBlur(() => {
     table.style.display = "grid";
   });
+  changetitle("Index");
   indexAktiv = !indexAktiv;
+  for (let i = 0; i < projBubbleElements.length; i++) {
+    const element = projBubbleElements[i];
+    element.classList.remove("hide");
+  }
+  projektcounter = -1;
 }
 function removeIndex() {
   if (!indexAktiv) return;
@@ -387,7 +416,7 @@ function showInfos() {
   if (infosAktiv) return;
   let removeAnimation = setInterval(() => {
     if (infosblur > 0) {
-      infosblur -= 1;
+      infosblur -= 2;
       infos.style.filter = "blur(" + infosblur + "px)";
     } else {
       clearInterval(removeAnimation);
@@ -395,19 +424,16 @@ function showInfos() {
     }
   }, 30);
   infosAktiv = !infosAktiv;
-
 }
 function removeInfos() {
   if (!infosAktiv) return;
   let removeAnimation = setInterval(() => {
-    if (infosblur < 10) {
-      infosblur += 1;
+    if (infosblur < 20) {
+      infosblur += 2;
       infos.style.filter = "blur(" + infosblur + "px)";
     } else {
       clearInterval(removeAnimation);
-      changetitle("Infos");
     }
   }, 20);
   infosAktiv = !infosAktiv;
-
 }
