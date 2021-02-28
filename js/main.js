@@ -36,7 +36,7 @@ let counter = 0;
 let indexAktiv = false;
 let infosAktiv = false;
 let stapelOffen = false;
-let infosblur = 10;
+let infosblur = 20;
 let einzelblur = 0;
 let blurfaktor = 10;
 var lastScroll = 0;
@@ -165,7 +165,6 @@ document.addEventListener("wheel", (e) => {
 
     if (!indexAktiv && stapelOffen) {
       stapelSchliessen();
-      removeBlur();
     }
 
     console.log(projektcounter);
@@ -212,8 +211,22 @@ stapelContainer.addEventListener("click", (e) => {
   }
 });
 
-closeButton.addEventListener("click", (e) => {
-  stapelSchliessen();
+headBalken.addEventListener("click", (e) => {
+  if (stapelOffen) {
+    stapelSchliessen();
+  } else if (title.textContent == "Index") {
+    showIndex();
+  }
+});
+headBalken.addEventListener("mouseover", (e) => {
+  if (!stapelOffen) {
+    title.textContent = "Index";
+  }
+});
+headBalken.addEventListener("mouseout", (e) => {
+  if (!stapelOffen) {
+    title.textContent = "Julika Hother";
+  }
 });
 
 // ++++++ Helferfunktionen ++++++
@@ -229,11 +242,13 @@ function updateProjVisibility(projektcounter) {
 }
 
 function stapelSchliessen() {
+  removeBlur();
   pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
   for (i = 0; i < imagesStapel.length; i++) {
     imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
   }
   stapelContainer.style.display = "none";
+  title.textContent = "Julika Hother";
   imagesStapel = [];
   n = 0;
   stapelOffen = false;
@@ -246,6 +261,7 @@ function stapeloeffnen(e) {
 
     stapelContainer.style.display = "block";
   }
+  title.textContent = "✕";
   stapelOffen = true;
 }
 
@@ -364,10 +380,17 @@ function removeBlur() {
 
 function showIndex() {
   if (indexAktiv) return;
+
   addBlur(() => {
     table.style.display = "grid";
   });
+  changetitle("Index");
   indexAktiv = !indexAktiv;
+  for (let i = 0; i < projBubbleElements.length; i++) {
+    const element = projBubbleElements[i];
+    element.classList.remove("hide");
+  }
+  projektcounter = -1;
 }
 function removeIndex() {
   if (!indexAktiv) return;
@@ -387,7 +410,7 @@ function showInfos() {
   if (infosAktiv) return;
   let removeAnimation = setInterval(() => {
     if (infosblur > 0) {
-      infosblur -= 1;
+      infosblur -= 2;
       infos.style.filter = "blur(" + infosblur + "px)";
     } else {
       clearInterval(removeAnimation);
@@ -395,19 +418,16 @@ function showInfos() {
     }
   }, 30);
   infosAktiv = !infosAktiv;
-
 }
 function removeInfos() {
   if (!infosAktiv) return;
   let removeAnimation = setInterval(() => {
-    if (infosblur < 10) {
-      infosblur += 1;
+    if (infosblur < 20) {
+      infosblur += 2;
       infos.style.filter = "blur(" + infosblur + "px)";
     } else {
       clearInterval(removeAnimation);
-      changetitle("Infos");
     }
   }, 20);
   infosAktiv = !infosAktiv;
-
 }
