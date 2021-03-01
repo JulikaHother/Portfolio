@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'Monument';
+    font-family: 'M';
     src: url('assets/fonts/ABCMonumentGrotesk-Medium.woff2') format('woff2'), url('assets/fonts/ABCMonumentGrotesk-Medium.woff') format('woff');
     font-weight: 600;
     font-style: italic;
@@ -9,7 +9,6 @@
 * {
     margin: 0;
     padding: 0;
-    cursor: pointer !important;
 }
 
 ::selection {
@@ -26,7 +25,7 @@
 }
 
 body {
-    font-family: "Monument", Arial, Helvetica, sans-serif;
+    font-family: 'M', Arial, Helvetica, sans-serif;
     font-weight: 600;
     background-color: #eae2fa;
     font-size: 150%;
@@ -34,10 +33,11 @@ body {
     background-repeat: no-repeat;
     height: 100%;
     overflow: hidden;
-    cursor: pointer !important;
 }
 
-
+.main-wrapper {
+    cursor: pointer;
+}
 
 .fixed-container {
     /* position: fixed;
@@ -57,7 +57,6 @@ body {
     background-color: rgb(180, 192, 231);
     z-index: 1000;
     color: red;
-    /* text-shadow: -0.5px 0 red, 0 0.5px red, 0.5px 0 red, 0 -1px red; */
     text-transform: uppercase;
     text-shadow: 0px 0px 3px red;
 }
@@ -66,6 +65,8 @@ body {
     padding: 10px 20px;
     width: 200px;
     float: left;
+    cursor: nw-resize;
+
 }
 
 #head-balken span {
@@ -83,7 +84,7 @@ body {
 #ext-link {
     display: none;
     padding: 0;
-    cursor: pointer;
+    cursor: ne-resize;
     z-index: 250;
     transform: translateY(-2px);
 }
@@ -92,7 +93,6 @@ body {
     body {
         /* font-size: 140%; */
         overflow: visible;
-
     }
 
     #head-balken {
@@ -140,7 +140,6 @@ body {
     text-shadow: 0px 0px 5px white;
     align-items: center;
     grid-template-columns: auto auto auto;
-    cursor: pointer;
 }
 
 #index-info {
@@ -217,7 +216,6 @@ body {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0%;
-    cursor: pointer;
     transform: translateY(49px);
     /* -webkit-filter: blur(30px); 
     filter: blur(30px); */
@@ -369,18 +367,9 @@ body {
     bottom: 0;
     display: none;
     z-index: 100;
-    cursor: pointer;
 }
 
 .stapelBild {
-    /* left: 50%;
-  max-height: 70vh;
-  max-width: 70vw;
-  height: 70%;
-  top: 50%; */
-    /* max-height: 50vh;
-    max-width: 50vw; */
-    /* width: 500px; */
     position: absolute;
     display: block;
     object-fit: contain;
@@ -409,8 +398,15 @@ body {
     width: 100vw;
     height: calc(100% - 50px);
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 2fr;
     grid-template-rows: 1fr auto;
+}
+
+@media (min-width: 1800px) {
+
+    #infos {
+        grid-template-columns: 2fr 1fr;
+    }
 }
 
 #infos a {
@@ -425,13 +421,14 @@ body {
 }
 
 .col {
-    padding: 20px 10px;
+    padding: 20px;
     max-width: 1000px;
+    line-height: 1.2em;
 }
 
 .col1 {
     font-size: 1.3em;
-    padding-right: 50px;
+    padding-right: 20px;
     line-height: 1.2em;
 }
 
@@ -499,7 +496,7 @@ body {
 }
 
 #impressum-button {
-    cursor: pointer !important;
+    cursor: e-resize;
 }
 
 #impressum-button:hover+#impressum-text {
@@ -511,22 +508,23 @@ body {
 }
 
 
-/* 
-.yearindent{
-    display: inline-block;
-    width: 150px;
-} */
-
-
 #desktopEmpfehlung {
     display: none;
-    position: absolute;
-    padding: 15px;
+    position: fixed;
+    height: 100%;
+    width: 100vw;
+    z-index: 10000;
+
+
+}
+
+#desktopEmpfehlung p {
+    padding: 20px;
     text-align: center;
-    bottom: 20vh;
-    color: white;
-    text-shadow: 0px 0px 5px white;
+    margin-top: 50vh;
+    color: red;
+    text-shadow: 0px 0px 2px red;
     z-index: 100;
     font-size: 1em;
-    line-height: 1.2em;
+    line-height: 1.1em;
 }
