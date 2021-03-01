@@ -1,47 +1,37 @@
 projektTitles = Object.keys(projekte);
 projectValues = Object.values(projekte);
 
-let randomPosX;
-let randomPosY;
 let windowWidth = window.innerWidth;
 let windowHeight = window.innerHeight;
 let projBubbleElements = [];
 let indexrows = [];
+let body = document.querySelector("body");
 let stapelContainer = document.querySelector("#stapelcontainer");
 let container = document.querySelector(".fixed-container");
-let headlineBG = document.querySelector(".headline");
 let extLinkArrow = document.querySelector("#ext-link");
 let urlElem = document.querySelector("#ext-url");
 let title = document.querySelector(".name");
 let imagesStapel = [];
-let currentProj = projBubbleElements[0];
-let currentValue;
 let table = document.querySelector(".index");
 let infos = document.querySelector("#infos");
-let blurriness = 0;
-
-let n = 0;
-let stapelText;
-let scrollN = 0;
-let scrollFaktor = 500;
-let scrollCounter = 0;
-
-let scrolldown;
 let pTitle = document.querySelector(".p-title");
 let headBalken = document.getElementById("head-balken");
 let aboutPage = document.getElementById("about");
-let infoText;
-let pfeil = "↓ &nbsp;&nbsp;&nbsp;";
 
-let projektcounter = 0;
+let n = 0;
 let counter = 0;
+let projektcounter = 0;
+let scrolldown;
+var lastScroll = 0;
 let indexAktiv = false;
 let infosAktiv = false;
 let stapelOffen = false;
-let infosblur = 15;
+
+let blurriness = 20;
+let infosMaxblur = 13;
+let infosblur = infosMaxblur;
 let einzelblur = 0;
 let blurfaktor = 10;
-var lastScroll = 0;
 
 // ++++++ Elemente generieren +++++++++
 
@@ -104,6 +94,13 @@ tempStr =
 table.innerHTML = tempStr;
 
 infos.style.filter = "blur(" + infosblur + "px)";
+for (i = 0; i < projektTitles.length; i++) {
+  projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
+}
+
+window.onload = function () {
+  removeBlur(0.3);
+};
 
 // +*++++ NUR DESKTOPP +++++
 if (!isMobile()) {
@@ -126,6 +123,7 @@ if (!isMobile()) {
         }
       }
       changetitle(projekte[target].title);
+      removeInfos();
     }
     removeIndex();
     updateProjVisibility(projektcounter);
@@ -133,9 +131,6 @@ if (!isMobile()) {
 
   // +++++++ Durchscrollen ++++++
 
-  // for (i = 0; i < projektTitles.length; i++) {
-  //   projBubbleElements[i].style.filter = "blur(" + cb + "px)";
-  // }
   document.addEventListener("wheel", (e) => {
     if (Date.now() - lastScroll > 40) {
       if (e.deltaY > 0) {
@@ -146,7 +141,7 @@ if (!isMobile()) {
         counter--;
       }
 
-      //++++++++  POJIS  +++++++++
+      //++++++++  PROJIS  +++++++++
 
       if (!stapelOffen) {
         if (counter % 4 == 0) {
@@ -174,7 +169,11 @@ if (!isMobile()) {
   // ++++++++ Stapel öffnen ++++++++
 
   container.addEventListener("click", (e) => {
-    stapeloeffnen(e);
+    if (pTitle.textContent == "") {
+      showIndex();
+    } else {
+      stapeloeffnen(e);
+    }
   });
 
   // +++ weitere Bilder anzeigen ++++++
@@ -208,32 +207,36 @@ if (!isMobile()) {
   });
 } else {
   // ++++++ NUR MOBIL +++++++
+
   headBalken.style.zIndex = 10;
   let desktEmpf = document.querySelector("#desktopEmpfehlung");
 
   container.style.display = "none";
   showInfos();
-
+  let touchstartpos = { x: 0, y: 0 };
+  document.addEventListener("touchstart", (e) => {
+    touchstartpos = Math.floor(e.touches[0].clientX);
+    console.log(touchstartpos);
+  });
   document.addEventListener("touchend", (e) => {
-    if(e.target.id == "abspann"){
-      console.log(e.target.id == "abspann");
+    let isTap = Math.floor(e.changedTouches[0].clientX) == touchstartpos;
+    let isContactme =
+      e.target == document.querySelector(".contactme") ||
+      e.target == document.querySelector(".contactme a");
+    console.log(e.target == document.querySelector(".contactme a"));
+    if (isTap && !isContactme) {
+      if (infosAktiv) {
+        removeInfos();
+        desktEmpf.style.display = "block";
+        body.style.overflow = "hidden";
+        headBalken.style.backgroundColor = "rgba(180, 192, 231,0)";
+      } else {
+        showInfos();
+        desktEmpf.style.display = "none";
+        body.style.overflow = "visible";
+        headBalken.style.backgroundColor = "rgb(180, 192, 231)";
+      }
     }
-    if (infosAktiv) {
-      removeInfos();
-      desktEmpf.style.display = "block";
-    } else {
-      showInfos();
-      desktEmpf.style.display = "none";
-    }
-    // if (container.style.display == "none") {
-
-    //   addBlur(() => {
-    //     container.style.display = "block";
-    //   });
-    // } else {
-    //   removeBlur();
-    //   container.style.display = "none";
-    // }
   });
 }
 
@@ -270,9 +273,17 @@ function updateProjVisibility(projektcounter) {
   if (!isInfos()) changetitle(projekte[getCurrentId()].title);
 }
 
+function stapeloeffnen(e) {
+  if (n == 0 && projekte[getCurrentId()].images[0]) {
+    addBlur(nextImage, e);
+    stapelContainer.style.display = "block";
+  }
+  title.textContent = "✕";
+  stapelOffen = true;
+}
+
 function stapelSchliessen() {
   removeBlur();
-  pTitle.innerHTML = pTitle.innerHTML.replace(pfeil, "");
   for (i = 0; i < imagesStapel.length; i++) {
     imagesStapel[i].parentNode.removeChild(imagesStapel[i]);
   }
@@ -283,48 +294,47 @@ function stapelSchliessen() {
   stapelOffen = false;
 }
 
-function stapeloeffnen(e) {
-  if (n == 0 && projekte[getCurrentId()].images[0]) {
-    // pTitle.innerHTML = pfeil + pTitle.textContent;
-    addBlur(nextImage, e);
-
-    stapelContainer.style.display = "block";
-  }
-  title.textContent = "✕";
-  stapelOffen = true;
-}
-
 function nextImage(e) {
   imagesStapel[n] = createNeuesElement("img", getCurrentId() + n, "stapelBild");
-
-  imagesStapel[n].src =
+  let imgelem = imagesStapel[n];
+  imgelem.src =
     "assets/images/" +
     getCurrentId() +
     "/" +
     projekte[getCurrentId()].images[n];
-  imagesStapel[n].style.transform =
-    "rotate(" + getRandomWinkel() + ") translateY(-50%) translateX(-50%)";
+
+  // ++++ drehen ++++
+
+  imgelem.style.transform =
+    "rotate(" +
+    getRandomWinkel() +
+    ") translateY(-25%) translateX(-25%) scale(.5)";
 
   let padding = 80;
-  let breite = windowWidth / 4 + padding;
-  let hoehe = windowHeight / 4 + padding;
+  let breite;
+  let hoehe;
 
-  if (e.x < breite) {
-    imagesStapel[n].style.left = breite;
-  } else if (e.x > windowWidth - breite) {
-    imagesStapel[n].style.left = windowWidth - breite;
-  } else {
-    imagesStapel[n].style.left = e.x;
-  }
-  if (e.y < hoehe + 50) {
-    imagesStapel[n].style.top = hoehe + 50;
-  } else if (e.y > windowHeight - hoehe) {
-    imagesStapel[n].style.top = windowHeight - hoehe;
-  } else {
-    imagesStapel[n].style.top = e.y;
-  }
+  imgelem.onload = function () {
+    breite = this.width / 4 + padding;
+    hoehe = this.height / 4 + padding;
 
-  stapelContainer.appendChild(imagesStapel[n]);
+    console.log(breite);
+    if (e.x < breite) {
+      imgelem.style.left = breite;
+    } else if (e.x > windowWidth - breite) {
+      imgelem.style.left = windowWidth - breite;
+    } else {
+      imgelem.style.left = e.x;
+    }
+    if (e.y < hoehe + 50) {
+      imgelem.style.top = hoehe + 50;
+    } else if (e.y > windowHeight - hoehe) {
+      imgelem.style.top = windowHeight - hoehe;
+    } else {
+      imgelem.style.top = e.y;
+    }
+  };
+  stapelContainer.appendChild(imgelem);
 
   n++;
 }
@@ -354,27 +364,16 @@ function getRandomWinkel() {
 }
 
 function createNeuesElement(type, id, klasse) {
+  if (type == "img") {
+    let elem = new Image();
+    elem.setAttribute("id", id);
+    elem.setAttribute("class", klasse);
+    return elem;
+  }
   let elem = document.createElement(type);
   elem.setAttribute("id", id);
   elem.setAttribute("class", klasse);
   return elem;
-}
-
-function checkScrollDirectionIsUp(event) {
-  if (event.wheelDelta) {
-    return event.wheelDelta > 0;
-  }
-  return event.deltaY < 0;
-}
-
-function durchrotieren(arr) {
-  if (scrolldown) {
-    arr.unshift(arr[arr.length - 1]);
-    arr.pop();
-  } else {
-    arr.push(arr[0]);
-    arr.shift();
-  }
 }
 
 function changetitle(input) {
@@ -403,15 +402,16 @@ function addBlur(callback, x) {
   }, 10);
 }
 
-function removeBlur() {
+function removeBlur(step = 2) {
   let removeAnimation = setInterval(() => {
     if (blurriness > 0) {
-      blurriness -= 2;
+      blurriness -= step;
       for (i = 0; i < projektTitles.length; i++) {
         projBubbleElements[i].style.filter = "blur(" + blurriness + "px)";
       }
     } else {
       clearInterval(removeAnimation);
+      blurriness = 0;
     }
   }, 10);
 }
@@ -462,7 +462,7 @@ function showInfos() {
 function removeInfos() {
   if (!infosAktiv) return;
   let removeAnimation = setInterval(() => {
-    if (infosblur < 15) {
+    if (infosblur < infosMaxblur) {
       infosblur += 2;
       infos.style.filter = "blur(" + infosblur + "px)";
     } else {
@@ -475,41 +475,4 @@ function removeInfos() {
 function isMobile() {
   var x = window.matchMedia("(max-width: 678px)");
   return x.matches;
-}
-
-var touchstartY = 0;
-var touchendY = 0;
-
-// document.addEventListener(
-//   "touchstart",
-//   function (e) {
-//     touchstartY = e.changedTouches[0].screenY;
-//   },
-//   false
-// );
-
-// document.addEventListener(
-//   "touchend",
-//   function (e) {
-//     touchendY = e.changedTouches[0].screenY;
-//     handleSwipe(e);
-//   },
-//   false
-// );
-
-function handleSwipe(e) {
-  if (touchendY + 10 < touchstartY) {
-    scrolldown = true;
-    nextProject();
-    console.log("hoch");
-  }
-  if (touchendY > touchstartY + 10) {
-    scrolldown = false;
-    nextProject();
-    console.log("runterr");
-  }
-
-  if (touchendY == touchstartY) {
-    console.log("tap");
-  }
 }
