@@ -308,15 +308,15 @@ function nextImage(e) {
   imgelem.style.transform =
     "rotate(" +
     getRandomWinkel() +
-    ") translateY(-25%) translateX(-25%) scale(.5)";
+    ") translateY(-50%) translateX(-50%)";
 
   let padding = 80;
   let breite;
   let hoehe;
 
   imgelem.onload = function () {
-    breite = this.width / 4 + padding;
-    hoehe = this.height / 4 + padding;
+    breite = this.width / 2 + padding;
+    hoehe = this.height / 2 + padding;
 
     console.log(breite);
     if (e.x < breite) {
