@@ -6,8 +6,18 @@ let projekte = {
         "category": "3D Enviroment",
         "background": "liquid.png",
         "images": [
-            "christine1.png"
-        ]
+            "liquid1.png",
+            "liquid2.png",
+            "liquid3.png",
+            "liquid4.png",
+            "liquid5.png",
+            "liquid6.png",
+            "liquid7.png",
+            "liquid8.png",
+            "liquid9.png",
+        ],
+        "url": "https://hubs.mozilla.com/6kaEEMy/gummy-trained-land"
+
     },
     "christine": {
         "title": "Körper, Raum, Kleidung",
@@ -66,7 +76,16 @@ let projekte = {
         "category": "experimental Website",
         "year": "2020",
         "background": "traum.png",
-        "images": [],
+        "images": [
+            "traum1.png",
+            "traum2.png",
+            "traum3.png",
+            "traum4.png",
+            "traum5.png",
+            "traum6.png",
+            "traum7.png",
+            "traum8.png"
+        ],
         "url": "julikahother.de/traum"
     },
     "holzschnitt": {
@@ -167,6 +186,7 @@ let projekte = {
             "tamuz1.gif",
             "tamuz2.png",
             "tamuz3.png",
+            "tamuz4.gif",
             "tamuz5.png",
             "tamuz6.png",
             "tamuz7.png",
