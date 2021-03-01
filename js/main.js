@@ -208,27 +208,31 @@ if (!isMobile()) {
   });
 } else {
   // ++++++ NUR MOBIL +++++++
-  console.log("iii");
-  document.addEventListener("scroll", (e) => {
-    //++++++++  POJIS  +++++++++
+  headBalken.style.zIndex = 10;
+  let desktEmpf = document.querySelector("#desktopEmpfehlung");
 
-    if (!stapelOffen) {
-      if (counter % 4 == 0) {
-        nextProject();
-      }
-      if (scrolldown) {
-        einzelblur++;
-      } else {
-        einzelblur--;
-      }
-      if (projektcounter >= 0 && !isInfos()) {
-        projBubbleElements[projektcounter].style.filter =
-          "blur(" + Math.max(0, einzelblur * blurfaktor) + "px)";
-      }
+  container.style.display = "none";
+  showInfos();
+
+  document.addEventListener("touchend", (e) => {
+    if(e.target.id == "abspann"){
+      console.log(e.target.id == "abspann");
     }
-    console.log("jj");
-    // if (!indexAktiv && stapelOffen) {
-    //   stapelSchliessen();
+    if (infosAktiv) {
+      removeInfos();
+      desktEmpf.style.display = "block";
+    } else {
+      showInfos();
+      desktEmpf.style.display = "none";
+    }
+    // if (container.style.display == "none") {
+
+    //   addBlur(() => {
+    //     container.style.display = "block";
+    //   });
+    // } else {
+    //   removeBlur();
+    //   container.style.display = "none";
     // }
   });
 }
@@ -476,22 +480,22 @@ function isMobile() {
 var touchstartY = 0;
 var touchendY = 0;
 
-document.addEventListener(
-  "touchstart",
-  function (e) {
-    touchstartY = e.changedTouches[0].screenY;
-  },
-  false
-);
+// document.addEventListener(
+//   "touchstart",
+//   function (e) {
+//     touchstartY = e.changedTouches[0].screenY;
+//   },
+//   false
+// );
 
-document.addEventListener(
-  "touchend",
-  function (e) {
-    touchendY = e.changedTouches[0].screenY;
-    handleSwipe(e);
-  },
-  false
-);
+// document.addEventListener(
+//   "touchend",
+//   function (e) {
+//     touchendY = e.changedTouches[0].screenY;
+//     handleSwipe(e);
+//   },
+//   false
+// );
 
 function handleSwipe(e) {
   if (touchendY + 10 < touchstartY) {
