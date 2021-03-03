@@ -86,7 +86,7 @@ let projekte = {
             "traum7.png",
             "traum8.png"
         ],
-        "url": "julikahother.de/traum"
+        "url": "/Traum/index.html"
     },
     "holzschnitt": {
         "title": "Holzschnitt",
