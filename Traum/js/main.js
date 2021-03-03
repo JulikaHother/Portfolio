@@ -12,9 +12,6 @@ for (let i = 0; i < imgs.length; i++) {
 }
 
 window.onload = function () {
-    clearInterval(animation)
-    loading.textContent = ""
-
     einfaden(starttypo);
 };
 
