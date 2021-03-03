@@ -26,6 +26,7 @@ var lastScroll = 0;
 let indexAktiv = false;
 let infosAktiv = false;
 let stapelOffen = false;
+let ready = false;
 
 let blurriness = 20;
 let infosMaxblur = 13;
@@ -99,7 +100,9 @@ for (i = 0; i < projektTitles.length; i++) {
 }
 
 window.onload = function () {
-  removeBlur(0.3);
+  removeBlur(0.3, () => {
+    ready = true;
+  });
 };
 
 // +*++++ NUR DESKTOPP +++++
@@ -110,7 +113,7 @@ if (!isMobile()) {
     let path = e.composedPath();
     let target = Array.from(path)
       .find((element) => element.classList.contains("index-row"))
-      .id.replaceAll("index-", "");
+      .id.replace("index-", "");
 
     if (target == "info") {
       projektcounter = projektTitles.length;
@@ -158,9 +161,9 @@ if (!isMobile()) {
         }
       }
 
-      if (!indexAktiv && stapelOffen) {
-        stapelSchliessen();
-      }
+      // if (!indexAktiv && stapelOffen) {
+      //   stapelSchliessen();
+      // }
 
       lastScroll = Date.now();
     }
@@ -191,7 +194,7 @@ if (!isMobile()) {
   title.addEventListener("click", (e) => {
     if (stapelOffen) {
       stapelSchliessen();
-    } else if (title.textContent == "Index") {
+    } else if (title.textContent == "Index" && ready) {
       showIndex();
     }
   });
@@ -213,17 +216,18 @@ if (!isMobile()) {
 
   container.style.display = "none";
   showInfos();
-  let touchstartpos = { x: 0, y: 0 };
+  let touchstartpos = {
+    x: 0,
+    y: 0
+  };
   document.addEventListener("touchstart", (e) => {
     touchstartpos = Math.floor(e.touches[0].clientX);
-    console.log(touchstartpos);
   });
   document.addEventListener("touchend", (e) => {
     let isTap = Math.floor(e.changedTouches[0].clientX) == touchstartpos;
     let isContactme =
       e.target == document.querySelector(".contactme") ||
       e.target == document.querySelector(".contactme a");
-    console.log(e.target == document.querySelector(".contactme a"));
     if (isTap && !isContactme) {
       if (infosAktiv) {
         removeInfos();
@@ -266,9 +270,9 @@ function nextProject() {
 function updateProjVisibility(projektcounter) {
   for (let i = 0; i < projBubbleElements.length; i++) {
     const element = projBubbleElements[i];
-    i >= projektcounter
-      ? element.classList.remove("hide")
-      : element.classList.add("hide");
+    i >= projektcounter ?
+      element.classList.remove("hide") :
+      element.classList.add("hide");
   }
   if (!isInfos()) changetitle(projekte[getCurrentId()].title);
 }
@@ -318,7 +322,6 @@ function nextImage(e) {
     breite = this.width / 2 + padding;
     hoehe = this.height / 2 + padding;
 
-    console.log(breite);
     if (e.x < breite) {
       imgelem.style.left = breite;
     } else if (e.x > windowWidth - breite) {
@@ -379,7 +382,6 @@ function createNeuesElement(type, id, klasse) {
 function changetitle(input) {
   pTitle.textContent = input;
   extLinkArrow.style.display = "none";
-
   if (typeof projectValues[projektcounter] != "undefined") {
     if (typeof projectValues[projektcounter].url != "undefined") {
       extLinkArrow.style.display = "inline-block";
@@ -402,7 +404,7 @@ function addBlur(callback, x) {
   }, 10);
 }
 
-function removeBlur(step = 2) {
+function removeBlur(step = 2, callback) {
   let removeAnimation = setInterval(() => {
     if (blurriness > 0) {
       blurriness -= step;
@@ -412,13 +414,19 @@ function removeBlur(step = 2) {
     } else {
       clearInterval(removeAnimation);
       blurriness = 0;
+      if (callback) {
+        callback();
+      }
     }
   }, 10);
+
+
 }
 
 function showIndex() {
   if (indexAktiv) return;
 
+  projektcounter = -1;
   addBlur(() => {
     table.style.display = "grid";
   });
@@ -428,7 +436,6 @@ function showIndex() {
     const element = projBubbleElements[i];
     element.classList.remove("hide");
   }
-  projektcounter = -1;
 }
 
 function removeIndex() {
@@ -452,6 +459,8 @@ function showInfos() {
       infosblur -= 2;
       infos.style.filter = "blur(" + infosblur + "px)";
     } else {
+      infos.style.filter = "blur(0px)";
+
       clearInterval(removeAnimation);
       changetitle("Infos");
     }

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="preload" href="fonts/Monarch.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/Monarch.woff" as="font" type="font/woff" crossorigin />
+    <link rel="preload" href="img/cursor-klein2.png" as="image" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Dream on</title>
+    <meta name="description" content="A description of the page" />
+
+    <!-- Points to an external CSS style sheet -->
+    <link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="loading"></div>
+    <div id="curtain">
+        <span>Klicke zum Einschlafen und <br> folge den Pfeilen durch die Träume.</span>
+    </div>
+
+    <div style="overflow-x: auto; overflow-y: hidden">
+        <div id="box1" onmouseenter="playAudio('1Traum')" ; onmouseleave="pauseAudio('1Traum')">
+            <p id="text1">1</p>
+            <p id="pfeil1">-></p>
+        </div>
+        <div id="box2" onmouseenter="playAudio('2Traum')" onmouseleave="pauseAudio('2Traum')">
+            <p id="pfeil2">-></p>
+            <p id="text2">2</p>
+        </div>
+        <div id="box4" onmouseenter="playAudio('4Traum')" onmouseleave="pauseAudio('4Traum')">
+            <p id="text4">4</p>
+            <p id="pfeil4">-></p>
+            <p id="pfeil5">-></p>
+            <p id="pfeil6">-></p>
+        </div>
+        <div id="box3" onmouseenter="playAudio('3Traum')" onmouseleave="pauseAudio('3Traum')">
+            <p id="pfeil3">-></p>
+            <p id="text3">3</p>
+        </div>
+        <div id="box5" onmouseenter="playAudio('5Traum')" onmouseleave="pauseAudio('5Traum')">
+            <p id="pfeil7">-></p>
+            <p id="text5">5</p>
+        </div>
+        <div id="hintergrund"></div>
+        <div id="traum"></div>
+    </div>
+
+    <div class="texte">
+        <p id="phase1">Einschlafphase</p>
+        <p id="phase2">Leichtschlafphase</p>
+        <p id="phase3">Tiefschlafphase</p>
+        <p id="phase4">Traumphase</p>
+        <p id="phase5">Aufwachphase</p>
+    </div>
+
+    <div>
+        <p id="phase0">
+            Schlaf- und <br /> Traumphasen
+        </p>
+    </div>
+
+    <div class="audio">
+        <audio id="bg">
+        <source src="audio/Traum_Hintergrund.mp3" type="audio/mpeg" />
+      </audio>
+        <audio id="1Traum">
+        <source src="audio/1Traum.mp3" type="audio/mpeg" />
+      </audio>
+        <audio id="2Traum">
+        <source src="audio/2Traum.mp3" type="audio/mpeg" />
+      </audio>
+        <audio id="3Traum">
+        <source src="audio/3Traum.mp3" type="audio/mpeg" />
+      </audio>
+        <audio id="4Traum">
+        <source src="audio/4Traum.mp3" type="audio/mpeg" />
+      </audio>
+        <audio id="5Traum">
+        <source src="audio/5Traum.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+</body>
+<footer>
+    <!-- Points to an external JS file -->
+    <script src="js/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+</footer>
+
+</html>
