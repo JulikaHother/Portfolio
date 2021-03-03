@@ -16,7 +16,7 @@ let projekte = {
             "liquid8.png",
             "liquid9.png",
         ],
-        "url": "https://hubs.mozilla.com/6kaEEMy/gummy-trained-land"
+        "url": "https://hub.link/6kaEEMy"
 
     },
     "christine": {
