@@ -1,0 +1,345 @@
+@font-face {
+    font-family: 'monarch';
+    src: url('../fonts/Monarch.woff2') format('woff2'), url('../fonts/Monarch.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* Reset CSS */
+
+* {
+    cursor: url('../img/cursor-klein2.png') 34 34, pointer !important;
+}
+#loading{
+    color: blue;
+    position: absolute;
+    top: 50vh;
+    width: 100vw;
+    text-align: center;
+    z-index: 2000;
+
+}
+html,
+body {
+    width: 99vw;
+    height: 99vh;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    background-blend-mode: difference;
+    font-family: 'monarch';
+    cursor: url(../img/cursor-klein2.png) 34 34, pointer !important;
+}
+
+
+/*Einschlafen*/
+
+#box1 {
+    border: 2px solid blue;
+    background-color: transparent;
+    position: absolute;
+    width: 25vw;
+    height: 22vh;
+    border-radius: 12.5vw / 11vh;
+    top: 8vh;
+    left: 2vw;
+    text-align: center;
+    color: blue;
+    z-index: 10;
+}
+
+#text1 {
+    font-size: 3.5vh;
+    color: blue;
+    margin-top: 5vh;
+}
+
+#pfeil1 {
+    font-size: 3.5vh;
+    color: blue;
+    left: 17vw;
+    position: absolute;
+    transform: rotate(50deg);
+}
+
+#box1:hover {
+    text-shadow: 4px 4px 8px orangered;
+    z-index: 20;
+    background-color: darkslategray;
+    mix-blend-mode: difference;
+    color: orangered;
+}
+
+
+/*Leichtschlafen*/
+
+#box2 {
+    border: 2px solid blue;
+    position: absolute;
+    width: 38vw;
+    height: 75vh;
+    border-radius: 19vw / 37.5vh;
+    top: 20vh;
+    left: 4vw;
+    text-align: center;
+    z-index: 10;
+}
+
+#pfeil2 {
+    font-size: 3.5vh;
+    color: blue;
+    position: absolute;
+    top: 20vh;
+    left: 25vw;
+    transform: rotate(-30deg);
+}
+
+#text2 {
+    font-size: 3.5vh;
+    color: blue;
+    position: absolute;
+    left: 15vw;
+    top: 35vh;
+}
+
+#box2:hover {
+    text-shadow: 2px 2px 4px orangered;
+    z-index: 20;
+    background-color: darkslategray;
+    mix-blend-mode: difference;
+}
+
+
+/*Tiefschlafen*/
+
+#box3 {
+    border: 2px solid blue;
+    position: absolute;
+    width: 50vw;
+    height: 90vh;
+    border-radius: 25vw / 45vh;
+    top: 3vh;
+    left: 35vw;
+    text-align: center;
+    z-index: 10;
+}
+
+#pfeil3 {
+    font-size: 3.5vh;
+    color: blue;
+    position: absolute;
+    top: 8vh;
+    right: 16vw;
+    transform: rotate(70deg);
+}
+
+#text3 {
+    font-size: 3.5vh;
+    color: blue;
+    position: absolute;
+    top: 15vh;
+    left: 18vw;
+}
+
+#box3:hover {
+    text-shadow: 2px 2px 4px orangered;
+    z-index: 18;
+    background-color: darkslategray;
+    mix-blend-mode: difference;
+}
+
+#box4 {
+    border: 2px solid blue;
+    position: absolute;
+    width: 52vw;
+    height: 50vh;
+    border-radius: 26vw / 25vh;
+    top: 34vh;
+    left: 34vw;
+    text-align: center;
+    z-index: 20;
+}
+
+#text4 {
+    font-size: 3.5vh;
+    color: blue;
+    position: absolute;
+    top: 10vh;
+    left: 30vw;
+}
+
+#pfeil4 {
+    font-size: 3.5vh;
+    color: blue;
+    position: absolute;
+    left: 15vw;
+    top: 15vh;
+    transform: rotate(20deg);
+}
+
+#pfeil5 {
+    font-size: 3.5vh;
+    color: blue;
+    position: absolute;
+    top: 25vh;
+    left: 25vw;
+    transform: rotate(-20deg);
+}
+
+#pfeil6 {
+    font-size: 3.5vh;
+    color: blue;
+    position: absolute;
+    left: 35vw;
+    top: 35vh;
+}
+
+#box4:hover {
+    text-shadow: 2px 2px 4px orangered;
+    z-index: 20;
+    background-color: darkslategray;
+    mix-blend-mode: difference;
+}
+
+#box5 {
+    border: 2px solid blue;
+    position: absolute;
+    width: 18vw;
+    height: 46vh;
+    border-radius: 9vw / 23vh;
+    top: 40vh;
+    right: 2vw;
+    text-align: center;
+    z-index: 10;
+}
+
+#text5 {
+    font-size: 3.5vh;
+    color: blue;
+    position: absolute;
+    top: 25vh;
+    left: 9vw;
+}
+
+#pfeil7 {
+    font-size: 3.5vh;
+    color: blue;
+    position: absolute;
+    top: 12vh;
+    left: 9vw;
+    transform: rotate(90deg);
+}
+
+#box5:hover {
+    text-shadow: 2px 2px 4px orangered;
+    z-index: 20;
+    background-color: darkslategray;
+    mix-blend-mode: difference;
+}
+
+#hintergrund {
+    display: block;
+    background-size: cover;
+    background-blend-mode: color;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 5;
+    mix-blend-mode: difference;
+}
+
+#traum {
+    display: block;
+    background-size: cover;
+    background-blend-mode: color;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 8;
+}
+
+#box1:hover~#hintergrund {
+    z-index: 15;
+}
+
+#box1:hover~#einschlafen {
+    z-index: 25;
+    font-size: 3.5vh;
+}
+
+.texte {
+    display: block;
+    text-align: right;
+    font-size: 3vh;
+    color: blue;
+    text-shadow: 0px 0px 6px orangered;
+}
+
+.texte p {
+    display: none;
+    position: absolute;
+    top: 1px;
+    right: 20px;
+    z-index: 100;
+}
+
+#phase0 {
+    display: block;
+    text-align: right;
+    font-size: 3vh;
+    color: blue;
+    position: absolute;
+    top: 1px;
+    right: 20px;
+    z-index: 1;
+}
+
+#box2:hover~#hintergrund {
+    z-index: 15;
+}
+
+#box3:hover~#hintergrund {
+    z-index: 15;
+}
+
+#box4:hover~#hintergrund {
+    z-index: 15;
+}
+
+#box5:hover~#hintergrund {
+    z-index: 15;
+}
+
+#pfeil1:hover,
+#pfeil2:hover,
+#pfeil3:hover,
+#pfeil4:hover,
+#pfeil5:hover,
+#pfeil6:hover,
+#pfeil7:hover {
+    cursor: url('../img/cursor2.png') 34 34, auto;
+}
+
+#curtain {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: blue;
+    z-index: 1000;
+    font-size: 1.4em;
+}
+
+#curtain span {
+    opacity: 0;
+}
