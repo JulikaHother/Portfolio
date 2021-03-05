@@ -432,7 +432,17 @@ body {
     line-height: 1.2em;
 }
 
+.col2 {
+    margin-top: 0.8em;
+    color: rgb(88, 13, 228);
+    font-size: 0.8em;
+    line-height: 0.6em;
+    text-shadow: 0px 0px 3px blue;
+}
 
+.yearindent {
+    line-height: 1em;
+}
 
 .indent {
     margin-left: 30px;

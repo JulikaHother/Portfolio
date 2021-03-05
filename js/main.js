@@ -91,7 +91,7 @@ for (i = 0; i < projektTitles.length; i++) {
 let tempStr = table.innerHTML;
 tempStr =
   tempStr +
-  '<li id="index-info" class="index-row"><span id="title-phd" class="li-title">Info</span><span id="year-phd" class="li-year">mail@julikahother.de</span></li>';
+  '<li id="index-info" class="index-row"><span id="title-phd" class="li-title">Info</span><span id="year-phd" class="li-year">julikahother@gmx.de</span></li>';
 table.innerHTML = tempStr;
 
 infos.style.filter = "blur(" + infosblur + "px)";

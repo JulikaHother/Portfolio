@@ -2,7 +2,7 @@ let curtain = document.querySelector("#curtain");
 let starttypo = document.querySelector("#curtain span");
 let loading = document.querySelector("#loading");
 let eingefaded = false;
-let imgs = ["aufwachen.gif", "einschlafen0.png", "einschlafen4.gif", "leichtschlaf.gif", "leichtschlaf.png", "tiefschlaf0.png", "tiefschlaf02.gif", "traum1.png", "traumphase0.png"]
+let imgs = ["aufwachen.gif", "einschlafen0.png", "einschlafen4.gif", "leichtschlaf.gif", "leichtschlaf.png", "tiefschlaf0.png", "tiefschlaf02.gif", "traum1.png", "traumphase0.png", "traum1.gif"]
 
 let preloads = []
 for (let i = 0; i < imgs.length; i++) {

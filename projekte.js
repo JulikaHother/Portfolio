@@ -26,7 +26,12 @@ let projekte = {
         "category": "Editoral Design",
         "background": "christine.png",
         "images": [
-            "christine1.png"
+            "christine1.png",
+            "christine2.png",
+            "christine3.png",
+            "christine4.png",
+            "christine5.png",
+            "christine6.png"        
         ]
     },
     "phd": {
@@ -71,7 +76,7 @@ let projekte = {
         ]
     },
     "traum": {
-        "title": "Traum",
+        "title": "Sweet Dreams",
         "description": "",
         "category": "experimental Website",
         "year": "2020",
