@@ -31,7 +31,7 @@ let projekte = {
             "christine3.png",
             "christine4.png",
             "christine5.png",
-            "christine6.png"        
+            "christine6.png"
         ]
     },
     "phd": {
@@ -161,8 +161,7 @@ let projekte = {
             "museum4.jpg",
             "museum5.jpg",
             "museum6.jpg"
-        ],
-        "url": "1"
+        ]
     },
     "wildwildweb": {
         "title": "wild wild web ",
