@@ -47,6 +47,7 @@ body {
   bottom: 0; */
     height: 100vh;
     width: 100vw;
+    cursor: crosshair;
 }
 
 #head-balken {
@@ -96,6 +97,7 @@ body {
     }
 
     #head-balken {
+        display: none;
         text-shadow: 0px 0px 2px red;
 
     }
@@ -104,6 +106,7 @@ body {
         padding: 10px 10px;
 
     }
+
 }
 
 
@@ -367,6 +370,7 @@ body {
     bottom: 0;
     display: none;
     z-index: 100;
+    cursor: crosshair;
 }
 
 .stapelBild {
@@ -427,22 +431,23 @@ body {
 }
 
 .col1 {
-    font-size: 1.3em;
+    font-size: 1.2em;
     padding-right: 20px;
     line-height: 1.2em;
 }
 
 .col2 {
-    margin-top: 0.8em;
-    color: rgb(88, 13, 228);
-    font-size: 0.8em;
-    line-height: 0.6em;
+    color: blue;
+    font-size: .9em;
     text-shadow: 0px 0px 3px blue;
+    min-width: 500px;
 }
 
-.yearindent {
-    line-height: 1em;
+.ueberschrift {
+    display: block;
+    margin-bottom: 10px;
 }
+
 
 .indent {
     margin-left: 30px;
@@ -470,6 +475,9 @@ body {
 
         grid-template-columns: 1fr;
         grid-template-rows: 1fr auto;
+
+        top: 5px;
+
     }
 
     .col {
@@ -537,4 +545,17 @@ body {
     z-index: 100;
     font-size: 1em;
     line-height: 1.1em;
+}
+
+#scrollPfeil{
+    position: absolute;
+    bottom: 5vh;
+    width: 100vw;
+    /* transform: translateY(50%); */
+    color: white;
+    font-size: .8em;
+    z-index: 1000;
+    text-align: center;
+    text-shadow: 0px 0px 10px red;
+
 }

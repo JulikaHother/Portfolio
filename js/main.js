@@ -17,6 +17,7 @@ let infos = document.querySelector("#infos");
 let pTitle = document.querySelector(".p-title");
 let headBalken = document.getElementById("head-balken");
 let aboutPage = document.getElementById("about");
+let scrollPfeil = document.querySelector("#scrollPfeil")
 
 let n = 0;
 let counter = 0;
@@ -91,7 +92,7 @@ for (i = 0; i < projektTitles.length; i++) {
 let tempStr = table.innerHTML;
 tempStr =
   tempStr +
-  '<li id="index-info" class="index-row"><span id="title-phd" class="li-title">Info</span><span id="year-phd" class="li-year">julikahother@gmx.de</span></li>';
+  '<li id="index-info" class="index-row"><span id="title-phd" class="li-title">Info</span><span id="year-phd" class="li-year">julika.hother@gmx.de</span></li>';
 table.innerHTML = tempStr;
 
 infos.style.filter = "blur(" + infosblur + "px)";
@@ -194,12 +195,18 @@ if (!isMobile()) {
   title.addEventListener("click", (e) => {
     if (stapelOffen) {
       stapelSchliessen();
+    } else if (indexAktiv) {
+
+      location.reload();
+
     } else if (title.textContent == "Index" && ready) {
+      removeInfos();
       showIndex();
     }
+
   });
   title.addEventListener("mouseover", (e) => {
-    if (!stapelOffen) {
+    if (!stapelOffen && !indexAktiv) {
       title.textContent = "Index";
     }
   });
@@ -380,6 +387,7 @@ function createNeuesElement(type, id, klasse) {
 }
 
 function changetitle(input) {
+  scrollPfeil.style.display = "none";
   pTitle.textContent = input;
   extLinkArrow.style.display = "none";
   if (typeof projectValues[projektcounter] != "undefined") {
