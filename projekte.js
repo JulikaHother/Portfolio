@@ -26,7 +26,7 @@ let projekte = {
         "category": "Editoral Design",
         "background": "christine.png",
         "images": [
-            "christine1.png",
+            "christine0.png",
             "christine2.png",
             "christine3.png",
             "christine4.png",
