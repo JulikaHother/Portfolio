@@ -114,6 +114,7 @@ let projekte = {
         "year": "2019",
         "background": "samt.png",
         "images": [
+            "cover.png",
             "samt0.png",
             "samt1.png",
             "samt2.png",

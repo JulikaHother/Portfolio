@@ -195,6 +195,8 @@ if (!isMobile()) {
   title.addEventListener("click", (e) => {
     if (stapelOffen) {
       stapelSchliessen();
+      title.textContent = "Index";
+
     } else if (indexAktiv) {
 
       location.reload();
