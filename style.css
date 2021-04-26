@@ -233,9 +233,9 @@ body {
 
 #liquid {
     width: auto;
-    height: 40vh;
-    top: 0;
-    right: 10vw;
+    height: 20vh;
+    top: 30vh;
+    right: 26vw;
 }
 
 #samt {
@@ -269,11 +269,12 @@ body {
 }
 
 #nakefews {
-    width: 55vh;
+    width: 50vh;
     max-width: 80vw;
     height: auto;
     bottom: 15vh;
-    left: 16vw;
+    left: 20vw;
+
 }
 
 #tamuz {
@@ -568,10 +569,16 @@ margin-left: 30px;   }
     bottom: 5vh;
     width: 100vw;
     /* transform: translateY(50%); */
-    color: white;
-    font-size: .8em;
+    color: blue;
+    font-size: 1em;
     z-index: 1000;
     text-align: center;
-    text-shadow: 0px 0px 10px red;
+    text-shadow: 0px 0px 10px blue;
+    transform: translateY(-10px);
 
+}
+
+.movedown{
+    transform: translateY(0px) !important;
+    transition: all 1500ms ease-out;
 }

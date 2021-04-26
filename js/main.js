@@ -104,6 +104,7 @@ window.onload = function () {
   removeBlur(0.3, () => {
     ready = true;
   });
+  scrollPfeil.classList.add("movedown")
 };
 
 // +*++++ NUR DESKTOPP +++++
