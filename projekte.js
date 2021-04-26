@@ -3,7 +3,7 @@ let projekte = {
         "title": "Liquid Body",
         "description": "",
         "year": "2021",
-        "category": "3D Enviroment",
+        "category": "3D Environment",
         "background": "liquid.png",
         "images": [
             "liquid1.png",
@@ -31,7 +31,16 @@ let projekte = {
             "christine3.png",
             "christine4.png",
             "christine5.png",
-            "christine6.png"
+            "christine6.png",
+            "christine7.png",
+            "christine8.png",
+            "christine9.png",
+            "christine10.png",
+            "christine11.png",
+            "christine12.png",
+            "christine13.png",
+            "christine14.png"
+
         ]
     },
     "phd": {
@@ -187,16 +196,10 @@ let projekte = {
         "year": "2018",
         "background": "tamuz.png",
         "images": [
-            "tamuz0.png",
-            "tamuz1.gif",
+            "tamuz4.gif",
             "tamuz2.png",
             "tamuz3.png",
-            "tamuz4.gif",
-            "tamuz5.png",
-            "tamuz6.png",
-            "tamuz7.png",
-            "tamuz8.png",
-            "tamuz9.png"
+            "tamuz1.gif"
         ]
     },
     "Riso": {
@@ -247,7 +250,6 @@ let projekte = {
         "year": "2018",
         "background": "nichtjetzt.png",
         "images": [
-            "nichtjetzt0.png",
             "nichtjetzt1.png",
             "nichtjetzt2.png",
             "nichtjetzt3.png",
@@ -256,17 +258,7 @@ let projekte = {
             "nichtjetzt6.png",
             "nichtjetzt7.png",
             "nichtjetzt8.png",
-            "nichtjetzt9.png",
-            "nichtjetzt10.png",
-            "nichtjetzt11.png",
-            "nichtjetzt12.png",
-            "nichtjetzt13.png",
-            "nichtjetzt14.png",
-            "nichtjetzt15.png",
-            "nichtjetzt16.png",
-            "nichtjetzt17.png",
-            "nichtjetzt18.png",
-            "nichtjetzt19.png"
+            "nichtjetzt9.png"
         ]
     }
 }
