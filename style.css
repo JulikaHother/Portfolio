@@ -27,7 +27,7 @@
 body {
     font-family: 'M', Arial, Helvetica, sans-serif;
     font-weight: 600;
-    background-color: #eae2fa;
+    background-color: rgb(203 207 224);
     font-size: 150%;
     color: black;
     background-repeat: no-repeat;
@@ -36,7 +36,7 @@ body {
 }
 
 .main-wrapper {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .fixed-container {
@@ -47,37 +47,36 @@ body {
   bottom: 0; */
     height: 100vh;
     width: 100vw;
-    cursor: crosshair;
+    cursor: pointer;
 }
 
 #head-balken {
     display: inline-block;
+    border-radius: 70px;
+    margin: 5px;
     position: absolute;
-    width: 100%;
+    width: calc(100% - 10px);
     height: 50px;
-    background-color: rgb(180, 192, 231);
+    background-color: #ee3800;
     z-index: 1000;
-    color: red;
+    color: white;
     text-transform: uppercase;
-    text-shadow: 0px 0px 3px red;
+    text-shadow: 0px 0px 3px white;
 }
 
 .name {
     padding: 10px 20px;
     width: 200px;
     float: left;
-    cursor: nw-resize;
-
+    cursor: pointer;
 }
 
 #head-balken span {
-    color: red;
+    color: white;
 }
-
 
 #title-wrapper {
     display: block;
-
     float: right;
     padding: 10px 20px;
 }
@@ -85,7 +84,7 @@ body {
 #ext-link {
     display: none;
     padding: 0;
-    cursor: ne-resize;
+    cursor: pointer;
     z-index: 250;
     transform: translateY(-2px);
 }
@@ -95,20 +94,14 @@ body {
         /* font-size: 140%; */
         overflow: visible;
     }
-
     #head-balken {
         display: none;
         text-shadow: 0px 0px 2px red;
-
     }
-
     .name {
         padding: 10px 10px;
-
     }
-
 }
-
 
 #about {
     display: none;
@@ -128,7 +121,7 @@ body {
     width: 100vw;
     height: calc(100% - 50px);
     top: 50px;
-    color: white;
+    color: rgb(255, 255, 255);
     text-transform: uppercase;
     /* align-items: center */
 }
@@ -152,14 +145,14 @@ body {
 }
 
 .index li:hover {
-    text-shadow: 0px 0px 5px white;
+    text-shadow: 0px 0px 5px blue;
     color: transparent;
     background-color: rgba(255, 255, 255, 0.1);
 }
 
 #index-info:hover {
-    text-shadow: 0px 0px 5px blue;
-    color: transparent;
+    text-shadow: 0px 0px 5px #ee3800;
+    color: #ee3800;
     background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -181,26 +174,20 @@ body {
     .li-category {
         display: none !important;
     }
-
     .index li {
         grid-template-rows: 100%;
         grid-template-columns: 1fr auto !important;
     }
-
     .index li span {
         text-align: left;
     }
-
     .li-year {
         /* display: none !important; */
         text-align: right;
-
     }
-
     #title-wrapper {
         display: none;
     }
-
 }
 
 .projektbubble {
@@ -219,7 +206,7 @@ body {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0%;
-    transform: translateY(49px);
+    /* transform: translateY(49px); */
     /* -webkit-filter: blur(30px); 
     filter: blur(30px); */
     /* display: none; */
@@ -231,11 +218,26 @@ body {
     display: none !important;
 }
 
-#liquid {
-    width: auto;
-    height: 20vh;
-    top: 30vh;
-    right: 26vw;
+#hybrid-print {
+    mix-blend-mode: exclusion;
+    width: 100vw;
+    height: 100vh;
+    top: 0vh;
+    left: 0vw;
+}
+
+#asia-bistro {
+    width: 40vw;
+    height: auto;
+    top: 5vh;
+    left: 20vw;
+}
+
+#hybrid-digital {
+    width: 100vw;
+    height: 100vh;
+    top: 0vh;
+    left: 0vw;
 }
 
 #samt {
@@ -261,35 +263,28 @@ body {
     right: 20vw;
 }
 
-#phd {
+#bookcover {
     width: auto;
-    height: 20vh;
-    right: 10vw;
-    top: 15vh;
+    height: 30vh;
+    left: 10vw;
+    bottom: 25vh;
 }
 
 #nakefews {
-    width: 50vh;
-    max-width: 80vw;
+    mix-blend-mode: luminosity;
+    width: 60vh;
+    max-width: 60vw;
     height: auto;
-    bottom: 15vh;
-    left: 20vw;
-
+    top: 10vh;
+    left: 15vw;
 }
 
 #tamuz {
     width: auto;
     max-width: 80vw;
-    height: 60vh;
+    height: 40vh;
     left: 0;
-    top: 12vh;
-}
-
-#hebtype {
-    width: 40vw;
-    height: 40vw;
-    top: 0px;
-    right: 50px;
+    top: 42vh;
 }
 
 #traum {
@@ -308,13 +303,6 @@ body {
     ;
 }
 
-#brennes {
-    width: 20vw;
-    height: auto;
-    bottom: 30vh;
-    right: 10vw;
-}
-
 #holzschnitt {
     width: 100vw;
     height: 100vh;
@@ -330,9 +318,9 @@ body {
 
 #siebdruck {
     width: auto;
-    height: 13vh;
-    bottom: 8vh;
-    right: 5vw;
+    height: 9vh;
+    bottom: 4vh;
+    right: 4vw;
     max-width: 90vw;
 }
 
@@ -341,13 +329,6 @@ body {
     height: auto;
     top: 45vh;
     left: 25vw;
-}
-
-#museum {
-    top: 2vh;
-    right: 1vw;
-    height: 65vh;
-    width: auto;
 }
 
 #christine {
@@ -371,7 +352,7 @@ body {
     bottom: 0;
     display: none;
     z-index: 100;
-    cursor: crosshair;
+    cursor: pointer;
 }
 
 .stapelBild {
@@ -403,21 +384,20 @@ body {
     width: 100vw;
     height: calc(100% - 50px);
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr auto;
 }
 
 @media (min-width: 1800px) {
-
     #infos {
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 3fr 2fr;
     }
 }
 
 #infos a {
     text-decoration: none;
     color: transparent;
-    text-shadow: 0px 0px 5px blue;
+    text-shadow: 0px 0px 3px blue;
 }
 
 #infos a:hover {
@@ -427,19 +407,21 @@ body {
 
 .col {
     padding: 20px;
-    max-width: 1000px;
-    line-height: 1.2em;
+    max-width: 1500px;
+    line-height: 1em;
+    font-size: 2.3em;
 }
 
 .col1 {
-    font-size: 1.2em;
+    font-size: 2.3em;
     padding-right: 20px;
-    line-height: 1.2em;
+    line-height: 1em;
 }
 
 .col2 {
     color: blue;
-    font-size: .9em;
+    font-size: 1em;
+    line-height: 1.1em;
     text-shadow: 0px 0px 3px blue;
     min-width: 530px;
 }
@@ -448,7 +430,6 @@ body {
     display: block;
     margin-bottom: 10px;
 }
-
 
 .indent {
     margin-left: 30px;
@@ -468,41 +449,30 @@ body {
 @media (max-width: 1100px) {
     .projektbubble {
         transform: translateY(0);
-
     }
-
     #infos {
         text-shadow: 0px 0px 2px blue;
-
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
     }
-
-
     .col {
         padding: 10px;
     }
-
     .col1 {
-        font-size: 1em;
+        font-size: 2em;
         padding-right: 10px;
         line-height: 1.2em;
     }
-
-    
     .col2 {
-margin-left: 30px;   }
-
-
+        margin-left: 30px;
+    }
     .foot {
         display: none;
         /* grid-row: 2/3; */
     }
-
     #desktopEmpfeehlung {
         display: block;
     }
-
     #infos a {
         color: transparent;
         text-shadow: 0px 0px 3px blue;
@@ -510,28 +480,22 @@ margin-left: 30px;   }
 }
 
 @media (max-width: 768px) {
-
     #infos {
         text-shadow: 0px 0px 2px blue;
-
         grid-template-columns: 1fr;
         grid-template-rows: 1fr auto;
-
         top: 5px;
-
     }
-
     .col2 {
         display: none;
     }
-
     .foot {
         display: none;
     }
 }
 
 #impressum-button {
-    cursor: e-resize;
+    cursor: pointer;
 }
 
 #impressum-button:hover+#impressum-text {
@@ -542,15 +506,12 @@ margin-left: 30px;   }
     display: none;
 }
 
-
 #desktopEmpfehlung {
     display: none;
     position: fixed;
     height: 100%;
     width: 100vw;
     z-index: 10000;
-
-
 }
 
 #desktopEmpfehlung p {
@@ -565,6 +526,7 @@ margin-left: 30px;   }
 }
 
 #scrollPfeil {
+    display: none;
     position: absolute;
     bottom: 5vh;
     width: 100vw;
@@ -575,10 +537,9 @@ margin-left: 30px;   }
     text-align: center;
     text-shadow: 0px 0px 10px blue;
     transform: translateY(-10px);
-
 }
 
-.movedown{
+.movedown {
     transform: translateY(0px) !important;
     transition: all 1500ms ease-out;
 }

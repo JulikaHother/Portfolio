@@ -1,26 +1,46 @@
 let projekte = {
-    "liquid": {
-        "title": "Liquid Body",
+    "hybrid-print": {
+        "title": "Hybrid Format – Print",
         "description": "",
         "year": "2021",
-        "category": "3D Environment",
-        "background": "liquid.png",
+        "category": "Editorial Design",
+        "background": "hybrid-print.png",
         "images": [
-            "liquid1.png",
-            "liquid2.png",
-            "liquid3.png",
-            "liquid4.png",
-            "liquid5.png",
-            "liquid6.png",
-            "liquid7.png",
-            "liquid8.png",
-            "liquid9.png",
+            "hybrid-p1.png",
+            "hybrid-p2.png",
+            "hybrid-p3.png",
+            "hybrid-p4.png",
+            "hybrid-p5.png",
+            "hybrid-p6.png",
+            "hybrid-p7.png"
         ],
-        "url": "https://hub.link/6kaEEMy"
+    },
+
+    "hybrid-digital": {
+        "title": "Hybrid Format – Digital",
+        "description": "",
+        "year": "2021",
+        "category": "Experimental Website",
+        "background": "hybrid-digital.png",
+        "images": [
+
+        ],
+        "url": "www.hybrid-format.com"
+    },
+
+    "asia-bistro": {
+        "title": "Asia Bistro",
+        "description": "",
+        "year": "2021",
+        "category": "Photobook – Editorial Design",
+        "background": "asia-bistro.png",
+        "images": [
+
+        ],
 
     },
     "christine": {
-        "title": "Körper, Raum, Kleidung",
+        "title": "In the mode of n-1",
         "description": "",
         "year": "2020",
         "category": "Editoral Design",
@@ -43,23 +63,29 @@ let projekte = {
 
         ]
     },
-    "phd": {
-        "title": "From the root of Variation",
+    "bookcover": {
+        "title": "Book Cover",
         "description": "",
         "year": "2020",
         "category": "Editoral Design",
-        "background": "phd.png",
+        "background": "book.png",
         "images": [
-            "phd0.png",
-            "phd1.png",
-            "phd2.png",
-            "phd3.png",
-            "phd4.png",
-            "phd5.png",
-            "phd6.png",
-            "phd7.png",
-            "phd8.png"
+            "book0.png",
+            "book1.png",
+            "book2.png"
         ]
+    },
+    "siebdruck": {
+        "title": "La mer de Mars",
+        "description": "",
+        "category": "Screen Prints",
+        "year": "2020",
+        "background": "siebdruck.png",
+        "images": [
+            "siebdruck0.png",
+            "siebdruck1.png"
+        ],
+
     },
     "nakefews": {
         "title": "Nake Fews",
@@ -72,17 +98,7 @@ let projekte = {
             "nakefews1.jpg"
 
         ]
-    },
-    "siebdruck": {
-        "title": "La mer de Mars",
-        "description": "",
-        "category": "Screen Prints",
-        "year": "2020",
-        "background": "siebdruck.png",
-        "images": [
-            "siebdruck0.png",
-            "siebdruck1.png"
-        ]
+
     },
     "traum": {
         "title": "Sweet Dreams",
@@ -137,7 +153,7 @@ let projekte = {
             "samt10.png",
             "samt11.png",
             "samt12.png"
-        ]
+        ],
     },
 
     "samtetc": {
@@ -156,22 +172,7 @@ let projekte = {
             "samtetc7.png",
             "samtetc8.png"
         ]
-    },
-    "museum": {
-        "title": "Wiener Moderne",
-        "description": "",
-        "category": "3D Experiments",
-        "year": "2019",
-        "background": "museum.png",
-        "images": [
-            "museum0.png",
-            "museum1.jpg",
-            "museum2.jpg",
-            "museum3.jpg",
-            "museum4.jpg",
-            "museum5.jpg",
-            "museum6.jpg"
-        ]
+
     },
     "wildwildweb": {
         "title": "wild wild web ",
@@ -200,7 +201,7 @@ let projekte = {
             "tamuz2.png",
             "tamuz3.png",
             "tamuz1.gif"
-        ]
+        ],
     },
     "Riso": {
         "title": "Hebrew Letters",
@@ -224,24 +225,8 @@ let projekte = {
             "riso12.png",
             "riso13.png",
             "riso14.png"
-        ]
-    },
-    "hebtype": {
-        "title": "שלום",
-        "description": "",
-        "category": "Hebrew Type Design",
-        "year": "2018",
-        "background": "hebtype.png",
-        "images": [
-            "hebtype0.png",
-            "hebtype1.png",
-            "hebtype2.png",
-            "hebtype3.png",
-            "hebtype4.png",
-            "hebtype5.png",
-            "hebtype6.png",
-            "hebtype7.png"
-        ]
+        ],
+
     },
     "nichtjetzt": {
         "title": "Nicht Jetzt! 7",
@@ -254,11 +239,7 @@ let projekte = {
             "nichtjetzt2.png",
             "nichtjetzt3.png",
             "nichtjetzt4.png",
-            "nichtjetzt5.png",
-            "nichtjetzt6.png",
-            "nichtjetzt7.png",
-            "nichtjetzt8.png",
-            "nichtjetzt9.png"
-        ]
+            "nichtjetzt5.png"
+        ],
     }
 }
