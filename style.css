@@ -57,7 +57,7 @@ body {
     position: absolute;
     width: calc(100% - 10px);
     height: 50px;
-    background-color: #ee3800;
+    background-color: #ff2f00;
     z-index: 1000;
     color: white;
     text-transform: uppercase;
@@ -218,6 +218,13 @@ body {
     display: none !important;
 }
 
+#ZZZ {
+    width: 100vw;
+    height: 100vh;
+    top: 0vh;
+    left: 0vw;
+}
+
 #hybrid-print {
     mix-blend-mode: exclusion;
     width: 100vw;
@@ -227,17 +234,19 @@ body {
 }
 
 #asia-bistro {
-    width: 40vw;
+    width: 30vw;
     height: auto;
     top: 5vh;
     left: 20vw;
 }
 
-#hybrid-digital {
+#hybrid-web {
     width: 100vw;
     height: 100vh;
-    top: 0vh;
-    left: 0vw;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
 #samt {
@@ -271,7 +280,7 @@ body {
 }
 
 #nakefews {
-    mix-blend-mode: luminosity;
+    mix-blend-mode: multiply;
     width: 60vh;
     max-width: 60vw;
     height: auto;
@@ -282,9 +291,9 @@ body {
 #tamuz {
     width: auto;
     max-width: 80vw;
-    height: 40vh;
-    left: 0;
-    top: 42vh;
+    height: 80vh;
+    left: -12;
+    top: 30vh;
 }
 
 #traum {
@@ -408,20 +417,19 @@ body {
 .col {
     padding: 20px;
     max-width: 1500px;
-    line-height: 1em;
     font-size: 2.3em;
 }
 
 .col1 {
-    font-size: 2.3em;
+    font-size: 1.8em;
     padding-right: 20px;
     line-height: 1em;
 }
 
 .col2 {
     color: blue;
-    font-size: 1em;
-    line-height: 1.1em;
+    font-size: 0.8em;
+    line-height: 1em;
     text-shadow: 0px 0px 3px blue;
     min-width: 530px;
 }
@@ -459,9 +467,9 @@ body {
         padding: 10px;
     }
     .col1 {
-        font-size: 2em;
+        font-size: 1.8em;
         padding-right: 10px;
-        line-height: 1.2em;
+        line-height: 1em;
     }
     .col2 {
         margin-left: 30px;

@@ -1,4 +1,16 @@
 let projekte = {
+    "ZZZ": {
+        "title": "Zwischen Zaun und Zirka",
+        "description": "",
+        "year": "2021",
+        "category": "Exhibition Identity",
+        "background": "ZZZ-AAA.png",
+        "images": [
+            "ZZZ.png",
+            "ZZZ2.png"
+        ],
+    },
+
     "hybrid-print": {
         "title": "Hybrid Format – Print",
         "description": "",
@@ -16,14 +28,19 @@ let projekte = {
         ],
     },
 
-    "hybrid-digital": {
+    "hybrid-web": {
         "title": "Hybrid Format – Digital",
         "description": "",
         "year": "2021",
         "category": "Experimental Website",
         "background": "hybrid-digital.png",
         "images": [
-
+            "digi1.png",
+            "digi2.png",
+            "digi3.png",
+            "digi4.png",
+            "digi5.png",
+            "digi6.png"
         ],
         "url": "www.hybrid-format.com"
     },
@@ -35,6 +52,7 @@ let projekte = {
         "category": "Photobook – Editorial Design",
         "background": "asia-bistro.png",
         "images": [
+            "asia-bistro.png",
 
         ],
 
@@ -70,15 +88,16 @@ let projekte = {
         "category": "Editoral Design",
         "background": "book.png",
         "images": [
-            "book0.png",
             "book1.png",
-            "book2.png"
+            "book2.png",
+            "book3.png"
+
         ]
     },
     "siebdruck": {
-        "title": "La mer de Mars",
+        "title": "Silkscreen",
         "description": "",
-        "category": "Screen Prints",
+        "category": "Poster",
         "year": "2020",
         "background": "siebdruck.png",
         "images": [
@@ -119,9 +138,9 @@ let projekte = {
         "url": "/Traum/index.html"
     },
     "holzschnitt": {
-        "title": "Holzschnitt",
+        "title": "Woodcut",
         "description": "",
-        "category": "Woodblock Prints",
+        "category": "Experimental Prints",
         "year": "2020",
         "background": "holzschnitt.png",
         "images": [
