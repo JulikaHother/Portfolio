@@ -106,19 +106,19 @@ let projekte = {
         ],
 
     },
-    "nakefews": {
-        "title": "Nake Fews",
-        "description": "",
-        "year": "2020",
-        "category": "Album Cover",
-        "background": "nakefews.png",
-        "images": [
-            "nakefews0.jpg",
-            "nakefews1.jpg"
+    // "nakefews": {
+    //     "title": "Nake Fews",
+    //     "description": "",
+    //     "year": "2020",
+    //     "category": "Album Cover",
+    //     "background": "nakefews.png",
+    //     "images": [
+    //         "nakefews0.jpg",
+    //         "nakefews1.jpg"
 
-        ]
+    //     ]
 
-    },
+    // },
     "traum": {
         "title": "Sweet Dreams",
         "description": "",
@@ -137,20 +137,20 @@ let projekte = {
         ],
         "url": "/Traum/index.html"
     },
-    "holzschnitt": {
-        "title": "Woodcut",
-        "description": "",
-        "category": "Experimental Prints",
-        "year": "2020",
-        "background": "holzschnitt.png",
-        "images": [
-            "holzschnitt0.jpg",
-            "holzschnitt1.jpg",
-            "holzschnitt2.jpg",
-            "holzschnitt3.jpg",
-            "holzschnitt4.jpg"
-        ]
-    },
+    // "holzschnitt": {
+    //     "title": "Woodcut",
+    //     "description": "",
+    //     "category": "Experimental Prints",
+    //     "year": "2020",
+    //     "background": "holzschnitt.png",
+    //     "images": [
+    //         "holzschnitt0.jpg",
+    //         "holzschnitt1.jpg",
+    //         "holzschnitt2.jpg",
+    //         "holzschnitt3.jpg",
+    //         "holzschnitt4.jpg"
+    //     ]
+    // },
     "samt": {
         "title": "Samt",
         "description": "Samt ist supi",
@@ -209,19 +209,7 @@ let projekte = {
         "url": "https://howww.de/web/julikahother/"
     },
 
-    "tamuz": {
-        "title": "Tamuz Museum",
-        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-        "category": "Visual Identity",
-        "year": "2018",
-        "background": "tamuz.png",
-        "images": [
-            "tamuz4.gif",
-            "tamuz2.png",
-            "tamuz3.png",
-            "tamuz1.gif"
-        ],
-    },
+
     "Riso": {
         "title": "Hebrew Letters",
         "description": "Aus einer ästhetischen Untersuchung hebräischer Schriftzeichen, entstand eine experimentelle Auseinandersetzung mit Farbe und Formgebung dokumentiert in Form eines mit dem Risographen gedrucken Booklets.",
@@ -247,18 +235,18 @@ let projekte = {
         ],
 
     },
-    "nichtjetzt": {
-        "title": "Nicht Jetzt! 7",
-        "description": "",
-        "category": "Magazine",
-        "year": "2018",
-        "background": "nichtjetzt.png",
-        "images": [
-            "nichtjetzt1.png",
-            "nichtjetzt2.png",
-            "nichtjetzt3.png",
-            "nichtjetzt4.png",
-            "nichtjetzt5.png"
-        ],
-    }
+    // "nichtjetzt": {
+    //     "title": "Nicht Jetzt! 7",
+    //     "description": "",
+    //     "category": "Magazine",
+    //     "year": "2018",
+    //     "background": "nichtjetzt.png",
+    //     "images": [
+    //         "nichtjetzt1.png",
+    //         "nichtjetzt2.png",
+    //         "nichtjetzt3.png",
+    //         "nichtjetzt4.png",
+    //         "nichtjetzt5.png"
+    //     ],
+    // }
 }

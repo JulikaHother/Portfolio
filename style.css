@@ -1,3 +1,11 @@
+/* @font-face {
+    font-family: 'ArialNarrow';
+    src: url('/assets/fonts/ArialNarrow.woff2') format('woff2'), url('/assets/fonts/ArialNarrow.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+} */
+
 @font-face {
     font-family: 'M';
     src: url('assets/fonts/ABCMonumentGrotesk-Medium.woff2') format('woff2'), url('assets/fonts/ABCMonumentGrotesk-Medium.woff') format('woff');
@@ -14,21 +22,22 @@
 ::selection {
     background-color: none;
     color: transparent;
-    text-shadow: 0px 0px 10px blue;
+    /* text-shadow: 0px 0px 10px blue; */
 }
 
 ::-moz-selection {
     background-color: none;
-    text-shadow: 0px 0px 10px blue;
+    /* text-shadow: 0px 0px 10px blue; */
     color: transparent;
     ;
 }
 
 body {
-    font-family: 'M', Arial, Helvetica, sans-serif;
-    font-weight: 600;
-    background-color: rgb(203 207 224);
-    font-size: 150%;
+    font-family: 'M', Arial, sans-serif;
+    font-weight: 400;
+    background: linear-gradient(0deg, rgba(232, 213, 255, 1) 0%, rgba(255, 247, 217, 1) 100%);
+
+    font-size: 120%;
     color: black;
     background-repeat: no-repeat;
     height: 100%;
@@ -53,15 +62,15 @@ body {
 #head-balken {
     display: inline-block;
     border-radius: 70px;
-    margin: 5px;
+    margin: 7px 0;
     position: absolute;
     width: calc(100% - 10px);
     height: 50px;
-    background-color: #ff2f00;
+    /* background-color: #ff2f00; */
     z-index: 1000;
-    color: white;
-    text-transform: uppercase;
-    text-shadow: 0px 0px 3px white;
+    color: rgb(111, 111, 111);
+    /* text-transform: uppercase; */
+    /* text-shadow: 0px 0px 3px white; */
 }
 
 .name {
@@ -72,7 +81,9 @@ body {
 }
 
 #head-balken span {
-    color: white;
+    color: red;
+    word-break: 90%;
+
 }
 
 #title-wrapper {
@@ -94,10 +105,13 @@ body {
         /* font-size: 140%; */
         overflow: visible;
     }
+
+    /* 
     #head-balken {
         display: none;
         text-shadow: 0px 0px 2px red;
-    }
+    } */
+
     .name {
         padding: 10px 10px;
     }
@@ -122,7 +136,7 @@ body {
     height: calc(100% - 50px);
     top: 50px;
     color: rgb(255, 255, 255);
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     /* align-items: center */
 }
 
@@ -139,13 +153,13 @@ body {
 }
 
 #index-info {
-    color: blue;
-    text-shadow: 0px 0px 5px blue;
+    color: rgb(104, 104, 114);
+    /* text-shadow: 0px 0px 1px blue; */
     /* text-shadow: -0.5px 0 rgb(180, 192, 231), 0 0.5px rgb(180, 192, 231), 0.5px 0 rgb(180, 192, 231), 0 -1px rgb(180, 192, 231); */
 }
 
 .index li:hover {
-    text-shadow: 0px 0px 5px blue;
+    /* text-shadow: 0px 0px 1px blue; */
     color: transparent;
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -174,17 +188,21 @@ body {
     .li-category {
         display: none !important;
     }
+
     .index li {
         grid-template-rows: 100%;
         grid-template-columns: 1fr auto !important;
     }
+
     .index li span {
         text-align: left;
     }
+
     .li-year {
         /* display: none !important; */
         text-align: right;
     }
+
     #title-wrapper {
         display: none;
     }
@@ -217,6 +235,8 @@ body {
 .hide {
     display: none !important;
 }
+
+/****************************** Projekte *******************************/
 
 #ZZZ {
     width: 100vw;
@@ -387,8 +407,8 @@ body {
 
 #infos {
     position: absolute;
-    color: blue;
-    text-shadow: 0px 0px 5px blue;
+    color: grey;
+    /* text-shadow: 0px 0px 2px blue; */
     top: 50px;
     width: 100vw;
     height: calc(100% - 50px);
@@ -396,6 +416,7 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr auto;
 }
+
 
 @media (min-width: 1800px) {
     #infos {
@@ -421,7 +442,7 @@ body {
 }
 
 .col1 {
-    font-size: 1.8em;
+    font-size: 1.4em;
     padding-right: 20px;
     line-height: 1em;
 }
@@ -433,6 +454,8 @@ body {
     text-shadow: 0px 0px 3px blue;
     min-width: 530px;
 }
+
+
 
 .ueberschrift {
     display: block;
@@ -446,7 +469,7 @@ body {
 .foot {
     padding: 20px;
     color: transparent;
-    text-shadow: 0px 0px 3px blue;
+    text-shadow: 0px 0px 3px grey;
     grid-column: 1/3;
 }
 
@@ -458,29 +481,36 @@ body {
     .projektbubble {
         transform: translateY(0);
     }
+
     #infos {
         text-shadow: 0px 0px 2px blue;
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
     }
+
     .col {
         padding: 10px;
     }
+
     .col1 {
         font-size: 1.8em;
         padding-right: 10px;
         line-height: 1em;
     }
+
     .col2 {
         margin-left: 30px;
     }
+
     .foot {
         display: none;
         /* grid-row: 2/3; */
     }
+
     #desktopEmpfeehlung {
         display: block;
     }
+
     #infos a {
         color: transparent;
         text-shadow: 0px 0px 3px blue;
@@ -494,9 +524,11 @@ body {
         grid-template-rows: 1fr auto;
         top: 5px;
     }
+
     .col2 {
         display: none;
     }
+
     .foot {
         display: none;
     }
