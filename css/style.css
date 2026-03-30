@@ -4,10 +4,15 @@
   font-variation-settings: "srff" 100, "ital" 0, "wght" 70;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
-  background: #fff;
-  z-index: 1;
+  background: rgb(83, 83, 83);
   font-family: "TimesNewArial", sans-serif;
   font-variation-settings: "srff" 0, "ital" 0, "wght" 70;
   font-size: 12px;
@@ -17,164 +22,104 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: lightgray;
-  overflow: hidden;
-  /* cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewport="0 0 32 32" style="fill:black;font-size:24px;"><text y="50%" transform="translate(0, 12)">🔮</text></svg>'), auto; */
 }
 
-
-a,
-button,
-input,
-label {
-  cursor: pointer;
-}
-
-*,
-*:after,
-*:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-ul,
-li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-
-
-#container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  top: 0px;
-  left: 0px;
-  transform: rotate(10deg);
-
-}
-
-#imageCanvas {
-  position: absolute;
-  top: 30vh;
-  left: 20vw;
-  width: 500px;
-  height: 300px;
-  border: #505050;
-  border-style: dotted;
-  border-radius: 6px;
-
-}
+/* ── Overlay text ─────────────────────────────────────────────── */
 
 #textOverlay {
-  position: absolute;
-  top: 30vh;
-  left: 20vw;
-  margin: 10px;
-  color: gray;
-  width: 450px;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90vw;
+  padding: 20px;
+  color: rgb(83, 83, 83);
   font-size: 20px;
   line-height: 90%;
   text-align: left;
-  font-family: "Arial Narrow";
+  font-family: "Arial Narrow", sans-serif;
   pointer-events: none;
-  -webkit-text-stroke-width: 1.5px;
-  -webkit-text-stroke-color: gray;
+  -webkit-text-stroke-width: 1.3px;
+  -webkit-text-stroke-color: rgb(83, 83, 83);
+  z-index: 100;
 }
 
-#changeImageBtn {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-size: 3em;
-  background-color: transparent;
-  border: none;
+#textOverlay.visible {
+  display: block;
 }
 
-.peng {
-  position: absolute;
-  font-size: 30px;
-  top: 5px;
-  right: 5px;
-  z-index: 1000;
-  background-color: transparent;
-  border: none;
+#textOverlay.visible ~ section {
+  filter: blur(12px);
+  transition: filter 0.4s ease;
+  pointer-events: none;
 }
 
-
-
-/* seite 2 */
+/* ── Future button ────────────────────────────────────────────── */
 
 .future {
-  position: absolute;
+  position: fixed;
   font-size: 30px;
   top: 5px;
   right: 5px;
   z-index: 1000;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
+/* ── Section / Gallery layout ─────────────────────────────────── */
 
-button {
+section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#gallery {
+  display: flex;
+  height: 100vh;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+#gallery::-webkit-scrollbar {
+  display: none;
+}
+
+#gallery canvas {
+  scroll-snap-align: start;
+  height: 100vh;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
+#gallery canvas:last-child {
+  scroll-snap-align: end;
+}
+
+/* ── Nav buttons ──────────────────────────────────────────────── */
+
+#prevButton,
+#nextButton {
   position: absolute;
-  top: 50vh;
-  /* Position in the middle vertically */
+  top: 50%;
+  transform: translateY(-50%);
   background-color: transparent;
-  /* White background */
   border: none;
-  /* Ensures the button is above other elements */
+  font-size: 35px;
+  color: rgb(83, 83, 83);
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: rgb(83, 83, 83);
   z-index: 2;
   cursor: pointer;
-
-
 }
 
 #prevButton {
   left: 1vw;
-  font-size: 35px;
-  height: auto;
-  /* cursor: w-resize; */
 }
 
 #nextButton {
   right: 1vw;
-  font-size: 35px;
-  height: auto;
-  /* cursor: e-resize; */
-
-}
-
-article {
-  display: flex;
-  transition: transform 1s ease;
-  /* Smooth transition for movement */
-}
-
-section {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.image-wrapper {
-  display: flex;
-  transition: transform 1s ease;
-}
-
-img {
-  height: 100vh;
-  width: auto;
-  padding: 0 .1vw 0 .1vw;
-}
-
-.image-wrapper canvas {
-  height: 100vh;
-  width: auto;
-  /* Adjust if necessary to maintain aspect ratio */
-  display: block;
-  padding: 0 .1vw;
 }

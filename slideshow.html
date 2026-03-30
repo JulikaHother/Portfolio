@@ -3,66 +3,45 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Julika Hother</title>
     <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <form action="index.html">
-        <button class="future" type="submit">🔮</button>
-    </form>
+    <button class="future" type="button">🐜</button>
+
+    <div id="textOverlay">
+        My name is Julika Anaïs Hother. I'm an interdisciplinary artist and designer.
+        <br>Test – Under construction.
+        ...
+    </div>
 
     <section>
-        <button id="prevButton">👈</button>
-        <article>
-            <div class="image-wrapper">
-                <canvas data-src="/img/slideshow/bild1.jpg" alt="Image 1"></canvas>
-                <canvas data-src="/img/slideshow/bild3.jpg" alt="Image 2"></canvas>
-                <canvas data-src="/img/slideshow/bild2.jpg" alt="Image 5"></canvas>
-                <!-- <canvas data-src="/img/slideshow/bild4.jpg" alt="Image 1"></canvas> -->
-                <canvas data-src="/img/slideshow/bild5.jpg" alt="Image 2"></canvas>
-                <canvas data-src="/img/slideshow/bild6.jpg" alt="Image 5"></canvas>
-                <canvas data-src="/img/slideshow/bild7.jpg" alt="Image 5"></canvas>
-                <canvas data-src="/img/slideshow/bild8.jpg" alt="Image 6"></canvas>
-                <canvas data-src="/img/slideshow/bild9.jpg" alt="Image 6"></canvas>
-                <canvas data-src="/img/slideshow/bild10.jpg" alt="Image 6"></canvas>
-                <canvas data-src="/img/slideshow/bild11.jpg" alt="Image 6"></canvas>
-                <canvas data-src="/img/slideshow/bild12.jpg" alt="Image 6"></canvas>
-                <canvas data-src="/img/slideshow/bild13.jpg" alt="Image 6"></canvas>
-                <canvas data-src="/img/slideshow/bild14.jpg" alt="Image 6"></canvas>
-                <canvas data-src="/img/slideshow/bild15.jpg" alt="Image 6"></canvas>
-                <canvas data-src="/img/slideshow/bild16.jpg" alt="Image 6"></canvas>
-                <canvas data-src="/img/slideshow/bild17.jpg" alt="Image 6"></canvas>
-                <canvas data-src="/img/slideshow/bild18.jpg" alt="Image 6"></canvas>
-                <canvas data-src="/img/slideshow/bild19.jpg" alt="Image 1"></canvas>
-                <canvas data-src="/img/slideshow/bild20.jpg" alt="Image 1"></canvas>
-                <canvas data-src="/img/slideshow/bild1.jpg" alt="Image 1"></canvas>
-                <canvas data-src="/img/slideshow/bild3.jpg" alt="Image 2"></canvas>
-
-
-
-
-            </div>
+        <button id="prevButton" aria-label="Previous">←</button>
+        <article id="gallery">
+            <canvas data-src="img/slideshow/0.jpg"></canvas>
+            <canvas data-src="img/slideshow/1.jpg"></canvas>
+            <canvas data-src="img/slideshow/2.jpg"></canvas>
+            <canvas data-src="img/slideshow/4.jpg"></canvas>
+            <canvas data-src="img/slideshow/3.jpg"></canvas>
+            <canvas data-src="img/slideshow/6.jpg"></canvas>
+            <canvas data-src="img/slideshow/7.jpg"></canvas>
+            <canvas data-src="img/slideshow/8.jpg"></canvas>
+            <canvas data-src="img/slideshow/9.jpg"></canvas>
+            <canvas data-src="img/slideshow/10.jpg"></canvas>
+            <canvas data-src="img/slideshow/11.jpg"></canvas>
+            <canvas data-src="img/slideshow/14.jpg"></canvas>
+            <canvas data-src="img/slideshow/13.jpg"></canvas>
+            <canvas data-src="img/slideshow/12.jpg"></canvas>
+            <canvas data-src="img/slideshow/18.jpg"></canvas>
+            <canvas data-src="img/slideshow/19.jpg"></canvas>
         </article>
-        <button id="nextButton">👉</button>
+        <button id="nextButton" aria-label="Next">→</button>
     </section>
 
-
-
-
-
-    <script src="js/jquery-3.6.3.min.js" type="text/javascript"></script>
-
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="js/slidescript.js"></script>
-
-
-
-    </script>
+    <script src="js/slidescript.js"></script>
 
 </body>
 
